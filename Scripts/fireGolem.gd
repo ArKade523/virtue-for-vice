@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 #creature stats
-const MOVEMENT_SPEED = 100
+const MOVEMENT_SPEED = 60
 var health = 140
 
 @onready var timer = $Timer
@@ -17,13 +17,14 @@ var x_mov = 0
 var y_mov = 0
 
 
-func _process(delta):
+func _process(_delta):
 	velocity.x = x_mov
 	velocity.y = y_mov
 	var result: Array = locator.collision_result
 	if not result.is_empty():
 		update_direction(Vector2(result[0].point.x - position.x, result[0].point.y - position.y))	
 	move_and_slide()
+	deal_with_damage()
 
 func update_direction(direction):
 	var angle = direction.normalized()
@@ -42,7 +43,6 @@ func update_direction(direction):
 	range.target_position.y = angle.y * 50
 
 func _on_timer_timeout():
-	#print("YOU WORKING?")
 	projectile()
 	
 	

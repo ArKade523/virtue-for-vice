@@ -23,6 +23,8 @@ GameState="*res://Scripts/GameState.gd"
 
 enemies=""
 current_area=""
+teal_health=""
+blue_health=""
 
 [input]
 
