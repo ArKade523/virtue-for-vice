@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://du642ncoo4iqm"]
+[gd_scene load_steps=10 format=4 uid="uid://bf652b4uc7b2w"]
 
 [ext_resource type="Texture2D" uid="uid://br6knds1mr6pl" path="res://Assets/tilesets/Dungeon_Tileset.png" id="1_wf6uj"]
 [ext_resource type="PackedScene" uid="uid://bddmie48n1ur1" path="res://Scenes/player_teal.tscn" id="2_87vr8"]
