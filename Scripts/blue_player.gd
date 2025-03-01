@@ -20,9 +20,9 @@ func _physics_process(delta):
 	
 	if GameState.blue_health <= 0:
 		GameState.blue_is_alive = false
-		GameState.blue_health = 0
+		GameState.blue_health = GameState.MAX_HEALTH
 		print("Player Blue has been killed...")
-		#TODO add stuff to respawn
+		self.queue_free()
 	
 	if !is_attacking: # If attacking, do not change the animation
 		# Get the input direction and handle the movement/deceleration.

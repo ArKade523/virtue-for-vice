@@ -1,6 +1,6 @@
 [gd_scene load_steps=32 format=3 uid="uid://bm4br7jacuwob"]
 
-[ext_resource type="Texture2D" uid="uid://dm4og0i7hij3x" path="res://Assets/ActualDarkBluePrince.png" id="2_g635u"]
+[ext_resource type="Texture2D" uid="uid://drvi18y6ysqsc" path="res://Assets/ActualDarkBluePrince.png" id="2_g635u"]
 [ext_resource type="Script" path="res://Scripts/blue_player.gd" id="4_fsnd5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xife7"]
@@ -179,6 +179,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_fmccq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e38ng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjdn5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ddwuk")
+}],
+"loop": true,
+"name": &"death",
+"speed": 20.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_6kv88")
 }, {
 "duration": 1.0,
@@ -232,9 +249,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jey56"]
-size = Vector2(21, 27)
+size = Vector2(12, 27)
 
 [node name="PlayerBlue" type="CharacterBody2D"]
+collision_layer = 3
 script = ExtResource("4_fsnd5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -244,13 +262,15 @@ shape = SubResource("RectangleShape2D_xife7")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(48, -160)
 sprite_frames = SubResource("SpriteFrames_sgjf6")
-animation = &"attack_left"
+animation = &"walk_down"
+frame = 1
+frame_progress = 0.726187
 
 [node name="player_hit" type="Area2D" parent="."]
 position = Vector2(48, -160)
 
 [node name="player_hit_box" type="CollisionShape2D" parent="player_hit"]
-position = Vector2(1.5, -1.5)
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_jey56")
 
 [node name="attack_cooldown" type="Timer" parent="."]

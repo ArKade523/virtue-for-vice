@@ -20,8 +20,10 @@ func _physics_process(delta):
 	
 	if GameState.teal_health <= 0:
 		GameState.teal_is_alive = false
-		GameState.teal_health = 0
+		GameState.teal_health = GameState.MAX_HEALTH
 		print("Player Teal has been killed...")
+		self.queue_free()
+		
 		#TODO add stuff to respawn
 	
 	if !is_attacking: # If attacking, do not change the animation
@@ -60,6 +62,15 @@ func _physics_process(delta):
 
 	#Move
 	move_and_slide()
+
+func play_death_animation():
+	# Play the chosen animation
+	$AnimatedSprite2D.play("death")
+
+	# Wait until animation reaches the last frame
+	var total_frames = $AnimatedSprite2D.sprite_frames.get_frame_count("death")
+	while $AnimatedSprite2D.frame < total_frames - 1:
+		await get_tree().process_frame  # Wait for each frame update
 
 func play_attack_animation():
 	is_attacking = true
