@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbdsri60g5tkh"]
+
+[ext_resource type="Texture2D" uid="uid://b2nlmvhikrb28" path="res://Assets/BossBeam.png" id="2_gh5p1"]
+[ext_resource type="Script" path="res://Scripts/mikumikubeam.gd" id="3_m5elq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwcv0"]
+atlas = ExtResource("2_gh5p1")
+region = Rect2(0, 0, 3200, 3200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_etk8l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwcv0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eqpje"]
+size = Vector2(3063, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cwqmn"]
+size = Vector2(3077, 12)
+
+[node name="mikumikubeam" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("3_m5elq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, 6)
+sprite_frames = SubResource("SpriteFrames_etk8l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6.5, -0.5)
+shape = SubResource("RectangleShape2D_eqpje")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(3.5, -1)
+shape = SubResource("RectangleShape2D_cwqmn")
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
