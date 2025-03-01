@@ -1,7 +1,7 @@
-[gd_scene load_steps=32 format=3 uid="uid://c7b2sooo2du5w"]
+[gd_scene load_steps=32 format=3 uid="uid://d4kgi4ntnsgil"]
 
 [ext_resource type="Script" path="res://Scripts/fireGolem.gd" id="1_b8hbb"]
-[ext_resource type="Texture2D" uid="uid://dc0ifliebxfk3" path="res://Assets/LavaGolem.png" id="2_0e1n4"]
+[ext_resource type="Texture2D" uid="uid://bds5dfqabp31q" path="res://Assets/LavaGolem.png" id="2_0e1n4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hphmy"]
 atlas = ExtResource("2_0e1n4")

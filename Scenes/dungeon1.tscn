@@ -690,7 +690,6 @@ tile_set = SubResource("TileSet_2mj68")
 [node name="player_teal" parent="." instance=ExtResource("2_3ubug")]
 position = Vector2(-165, 79)
 motion_mode = 0
-inventory = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-39, -53)

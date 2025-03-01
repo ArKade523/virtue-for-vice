@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bddmie48n1ur1"]
+[gd_scene load_steps=33 format=3 uid="uid://bddmie48n1ur1"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_xd3fx"]
 [ext_resource type="Texture2D" uid="uid://b51rp1c6s4vwr" path="res://Assets/BluePrince.png" id="3_a51jg"]
@@ -240,6 +240,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a11qd"]
+size = Vector2(10, 24)
+
 [node name="player_teal" type="CharacterBody2D"]
 collision_layer = 3
 motion_mode = 1
@@ -261,11 +264,24 @@ sprite_frames = SubResource("SpriteFrames_jthdb")
 animation = &"attack_right"
 frame_progress = 0.281886
 
-[node name="sword_hit" type="Area2D" parent="AnimatedSprite2D"]
+[node name="player_hit" type="Area2D" parent="."]
+position = Vector2(48, -160)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AnimatedSprite2D/sword_hit"]
+[node name="player_hit_box" type="CollisionShape2D" parent="player_hit"]
+shape = SubResource("RectangleShape2D_a11qd")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(48, -160)
+
+[node name="sword_hit" type="Area2D" parent="Marker2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Marker2D/sword_hit"]
 position = Vector2(-10, 9)
 scale = Vector2(1.15972, 1.26705)
 polygon = PackedVector2Array(12.0719, -16.574, 12.0719, 2.36771, 21.5569, 3.94619, 21.5569, -7.10314, 21.5569, -18.1525)
 
-[connection signal="area_entered" from="AnimatedSprite2D/sword_hit" to="." method="_on_sword_hit_area_entered"]
+[connection signal="area_entered" from="player_hit" to="." method="_on_sword_hit_area_entered"]
+[connection signal="body_entered" from="player_hit" to="." method="_on_player_hit_body_entered"]
+[connection signal="body_exited" from="player_hit" to="." method="_on_player_hit_body_exited"]
+[connection signal="child_entered_tree" from="player_hit/player_hit_box" to="." method="_on_player_hit_box_child_entered_tree"]
+[connection signal="area_entered" from="Marker2D/sword_hit" to="." method="_on_sword_hit_area_entered"]
