@@ -2,16 +2,18 @@
 
 [ext_resource type="Texture2D" uid="uid://c5a5ewjiyxnu5" path="res://Assets/pixilart-drawing.png" id="1_57tqk"]
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_r0blr"]
-[ext_resource type="PackedScene" uid="uid://cssf3vvokj7rc" path="res://Scenes/enemy.tscn" id="3_c1n34"]
+[ext_resource type="PackedScene" uid="uid://cssf3vvokj7rc" path="res://Scenes/goblin.tscn" id="3_c1n34"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2yl0p"]
 size = Vector2(86, 46)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qsudh"]
+normal = Vector2(-0.023642, -0.99972)
 
 [node name="Dungeon" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="."]
+collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_r0blr")
 
