@@ -1,6 +1,7 @@
 extends Control
 
-@onready var inventory:Inventory = preload("res://inventory/player1_inventory.tres")
+@onready var inventory:Inventory = preload("res://inventory/player_blue_inventory.tres")
+#@onready var inventory:Inventory = preload("res://inventory/player_teal_inventory.tres")
 @onready var slots:Array = $NinePatchRect/GridContainer.get_children()
 var is_open = false 
 

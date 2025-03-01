@@ -5,13 +5,13 @@ var move_animations:Array = ["walk_up", "walk_down", "walk_left", "walk_right"]
 
 	
 
-#player teal states
+#player blue states
 const MOVEMENT_SPEED = GameState.MOVEMENT_SPEED
 var is_attacking = false
 var enemy_in_attack_range = false
 var enemy_attack_cooldown = true
 var direction_facing = 0 #up=0,down=1,left=2,right=3
-var teal_attack_inprogress = false
+var blue_attack_inprogress = false
 
 var damage = 5
 
@@ -19,17 +19,17 @@ var damage = 5
 func _physics_process(delta):	
 	enemy_attack(damage)
 	
-	if GameState.teal_health <= 0:
-		GameState.teal_is_alive = false
-		GameState.teal_health = 0
-		print("Player Teal has been killed...")
+	if GameState.blue_health <= 0:
+		GameState.blue_is_alive = false
+		GameState.blue_health = 0
+		print("Player Blue has been killed...")
 		#TODO add stuff to respawn
 	
 	if !is_attacking: # If attacking, do not change the animation
 		# Get the input direction and handle the movement/deceleration.
 		var input_direction = Vector2(
-			Input.get_action_strength("teal_right")- Input.get_action_strength("teal_left"),
-			Input.get_action_strength("teal_down") - Input.get_action_strength("teal_up")
+			Input.get_action_strength("blue-right")- Input.get_action_strength("blue-left"),
+			Input.get_action_strength("blue-down") - Input.get_action_strength("blue-up")
 		)
 			
 		#Update Movement Speed
@@ -55,7 +55,7 @@ func _physics_process(delta):
 		velocity = input_direction * MOVEMENT_SPEED
 
 	#Attack Animations and logic
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("blue_attack"):
 		play_attack_animation()
 	
 
@@ -64,8 +64,8 @@ func _physics_process(delta):
 
 func play_attack_animation():
 	is_attacking = true
-	GameState.teal_current_attacking = true
-	teal_attack_inprogress = true
+	GameState.blue_current_attacking = true
+	blue_attack_inprogress = true
 	var attack_animation = ""
 	match direction_facing:
 		0: #facing up
@@ -88,23 +88,26 @@ func play_attack_animation():
 	# Animation finished, return to idle
 	is_attacking = false
 	
-func teal_player():
+func blue_player():
 	pass
 
 func player_blue_attack():
 	print("took damage from blue player")
-	GameState.player_teal_heal
+	GameState.player_blue_heal
 
 func enemy_attack(damage):
 	if enemy_in_attack_range and enemy_attack_cooldown:
-		GameState.teal_health -= damage
+		GameState.blue_health -= damage
 		enemy_attack_cooldown = false
-		print(GameState.teal_health)
+		print(GameState.blue_health)
 		$attack_cooldown.start() 
 
 func _on_player_hit_body_entered(body: Node2D) -> void:
 	if body.has_method("enemy") or body.has_method("enemy-player"):
 		enemy_in_attack_range = true
+	if body.has_method("teal_player"):
+		enemy_in_attack_range = true
+		damage = GameState.teal_damage
 	if body.has_method("firebolt"):
 		damage = GameState.FIREBOLT_DAMAGE
 

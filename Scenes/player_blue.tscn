@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://e1xrg6ee8lik"]
+
+[ext_resource type="Script" path="res://Scripts/teal_player.gd" id="1_k0em3"]
+[ext_resource type="PackedScene" uid="uid://b8dsvpplbp5y5" path="res://inventory/inventory_UI.tscn" id="2_tldfi"]
+[ext_resource type="Script" path="res://Scripts/blue_player.gd" id="4_fsnd5"]
+[ext_resource type="Resource" uid="uid://cu0y2i33q5sx3" path="res://inventory/player_blue_inventory.tres" id="5_myacm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2yl0p"]
+size = Vector2(9, 12.625)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jthdb"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"attack_down",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"attack_left",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"attack_right",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"attack_up",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walk_down",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walk_left",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walk_right",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"walk_up",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a11qd"]
+size = Vector2(10, 24)
+
+[node name="player_teal" type="CharacterBody2D"]
+collision_layer = 3
+motion_mode = 1
+script = ExtResource("1_k0em3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(47.5, -153.688)
+shape = SubResource("RectangleShape2D_2yl0p")
+
+[node name="inventory_UI" parent="." instance=ExtResource("2_tldfi")]
+offset_left = 1.0
+offset_top = -219.0
+offset_right = 101.0
+offset_bottom = -176.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(48, -160)
+sprite_frames = SubResource("SpriteFrames_jthdb")
+animation = &"walk_right"
+
+[node name="player_hit" type="Area2D" parent="."]
+position = Vector2(48, -160)
+script = ExtResource("4_fsnd5")
+inventory = ExtResource("5_myacm")
+
+[node name="player_hit_box" type="CollisionShape2D" parent="player_hit"]
+shape = SubResource("RectangleShape2D_a11qd")
+
+[node name="attack_cooldown" type="Timer" parent="."]
+
+[connection signal="body_entered" from="player_hit" to="." method="_on_player_hit_body_entered"]
+[connection signal="body_exited" from="player_hit" to="." method="_on_player_hit_body_exited"]
+[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

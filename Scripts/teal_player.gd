@@ -55,7 +55,7 @@ func _physics_process(delta):
 		velocity = input_direction * MOVEMENT_SPEED
 
 	#Attack Animations and logic
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("teal_attack"):
 		play_attack_animation()
 	
 
