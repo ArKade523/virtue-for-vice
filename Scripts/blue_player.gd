@@ -1,8 +1,6 @@
 extends CharacterBody2D
 # player variables and constants
 var move_animations:Array = ["walk_up", "walk_down", "walk_left", "walk_right"]
-@export var inventory:Inventory
-
 	
 
 #player blue states
@@ -28,8 +26,8 @@ func _physics_process(delta):
 	if !is_attacking: # If attacking, do not change the animation
 		# Get the input direction and handle the movement/deceleration.
 		var input_direction = Vector2(
-			Input.get_action_strength("blue-right")- Input.get_action_strength("blue-left"),
-			Input.get_action_strength("blue-down") - Input.get_action_strength("blue-up")
+			Input.get_action_strength("blue_right")- Input.get_action_strength("blue_left"),
+			Input.get_action_strength("blue_down") - Input.get_action_strength("blue_up")
 		)
 			
 		#Update Movement Speed
@@ -105,9 +103,6 @@ func enemy_attack(damage):
 func _on_player_hit_body_entered(body: Node2D) -> void:
 	if body.has_method("enemy") or body.has_method("enemy-player"):
 		enemy_in_attack_range = true
-	if body.has_method("teal_player"):
-		enemy_in_attack_range = true
-		damage = GameState.teal_damage
 	if body.has_method("firebolt"):
 		damage = GameState.FIREBOLT_DAMAGE
 

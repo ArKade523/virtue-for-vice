@@ -1,9 +1,7 @@
-[gd_scene load_steps=34 format=3 uid="uid://bddmie48n1ur1"]
+[gd_scene load_steps=32 format=3 uid="uid://bddmie48n1ur1"]
 
 [ext_resource type="Script" path="res://Scripts/teal_player.gd" id="1_dctm1"]
-[ext_resource type="Resource" uid="uid://eaw5jlml72wt" path="res://inventory/player_teal_inventory.tres" id="2_xipij"]
-[ext_resource type="Texture2D" uid="uid://b51rp1c6s4vwr" path="res://Assets/BluePrince.png" id="3_a51jg"]
-[ext_resource type="PackedScene" uid="uid://b8dsvpplbp5y5" path="res://inventory/inventory_UI.tscn" id="4_hubo7"]
+[ext_resource type="Texture2D" uid="uid://x20rqj2xkxg5" path="res://Assets/BluePrince.png" id="3_a51jg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2yl0p"]
 size = Vector2(9, 12.625)
@@ -249,17 +247,10 @@ z_index = 5
 collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_dctm1")
-inventory = ExtResource("2_xipij")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(47.5, -153.688)
 shape = SubResource("RectangleShape2D_2yl0p")
-
-[node name="inventory_UI" parent="." instance=ExtResource("4_hubo7")]
-offset_left = 1.0
-offset_top = -219.0
-offset_right = 101.0
-offset_bottom = -176.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(48, -160)
