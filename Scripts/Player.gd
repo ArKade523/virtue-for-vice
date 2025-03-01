@@ -1,17 +1,8 @@
 extends CharacterBody2D
 # player variables and constants
-<<<<<<< Updated upstream
+@onready var sword_sound = $Sword_Sound
+
 var move_animations:Array = ["walk_up", "walk_down", "walk_left", "walk_right"]
-@export var inventory:Inventory
-=======
-const MOVEMENT_SPEED = 200
-#@export var inventory:Inventory
-
-sound.play()
->>>>>>> Stashed changes
-
-	
-
 #player teal states
 const MOVEMENT_SPEED = GameState.MOVEMENT_SPEED
 var is_attacking = false
@@ -76,13 +67,18 @@ func play_attack_animation():
 	var attack_animation = ""
 	match direction_facing:
 		0: #facing up
+			sword_sound.play()
 			attack_animation = "attack_up"
 		1: #facing down
+			sword_sound.play()
 			attack_animation = "attack_down"
 		2: #facing left
+			sword_sound.play()
 			attack_animation = "attack_left"
 		3: #facing right
+			sword_sound.play()
 			attack_animation = "attack_right"
+			
 
 	# Play the chosen animation
 	$AnimatedSprite2D.play(attack_animation)

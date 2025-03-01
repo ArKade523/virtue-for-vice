@@ -33,8 +33,14 @@ var next_dungeon_map = [
 	"res://Scenes/dungeon1.tscn",
 ]
 
+
+
 var current_scene_container: Node2D
 var current_scene: int = 0
+
+
+
+
 
 func _ready():
 	current_scene_container = get_tree().get_first_node_in_group("current_area")

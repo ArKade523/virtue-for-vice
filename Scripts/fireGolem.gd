@@ -9,6 +9,7 @@ var health = 140
 @onready var locator = $locator
 @onready var range = $range
 @onready var fireBolt = preload("res://Scenes/fireBolt.tscn")
+@onready var fire_sound = $AudioStreamPlayer2D  # Reference the sound node
 
 # Players
 var teal_in_attack_zone = false
@@ -60,7 +61,8 @@ func projectile():
 		var direction = (result[0].point - position).normalized()  # Get direction
 		bullet.rotation = direction.angle()  # Rotate the bullet properly
 		bullet.initialize_fireBolt(direction)  # Ensure it moves in the right direction
-		get_parent().add_child(bullet)  # Add to the scene
+		get_parent().add_child(bullet)
+		fire_sound.play()  # Add to the scene
 
 
 func _apply_damage():
