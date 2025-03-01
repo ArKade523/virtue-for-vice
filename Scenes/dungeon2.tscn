@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=4 uid="uid://cx0h6bffhlp25"]
 
 [ext_resource type="Texture2D" uid="uid://br6knds1mr6pl" path="res://Assets/tilesets/Dungeon_Tileset.png" id="1_k1cg5"]
-[ext_resource type="PackedScene" uid="uid://bddmie48n1ur1" path="res://Scenes/player_teal.tscn" id="2_ao3af"]
+[ext_resource type="PackedScene" uid="uid://byqefgw7xjfod" path="res://Scenes/player_teal.tscn" id="2_ao3af"]
 [ext_resource type="PackedScene" uid="uid://cssf3vvokj7rc" path="res://Scenes/goblin.tscn" id="3_h7dhg"]
 [ext_resource type="PackedScene" uid="uid://bl8je1w2tkgfy" path="res://Scenes/hatch.tscn" id="4_p22gv"]
 
@@ -691,7 +691,6 @@ tile_map_data = PackedByteArray("AAD8//7/AAAAAAkAAAAEAP7/AAAAAAkAAAAMAP7/AAAAAAk
 tile_set = SubResource("TileSet_q1oa6")
 
 [node name="player_teal" parent="." instance=ExtResource("2_ao3af")]
-z_index = 5
 position = Vector2(-165, 79)
 motion_mode = 0
 
