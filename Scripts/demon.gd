@@ -11,6 +11,7 @@ var health = 20
 @onready var right = $right
 @onready var charge = preload("res://Scenes/charge.tscn")
 @onready var animation = $AnimatedSprite2D
+@onready var charge_sound = $Charge 
 #players
 var teal_in_attack_zone = false
 var blue_in_attack_zone = false
@@ -18,6 +19,8 @@ var blue_in_attack_zone = false
 var x_mov = 0
 var y_mov = 0
 
+func _process(_delta):
+	deal_with_damage() 
 
 func _on_timer_timeout():
 	projectile()
@@ -43,7 +46,8 @@ func projectile():
 	
 	bullet.position = source
 	bullet.rotation = Vector2(randi_range(0,255), randi_range(0,255)).angle()
-	add_child(bullet)  # Add to the scene
+	add_child(bullet) 
+	charge_sound.play() # Add to the scene
 
 
 func deal_with_damage():

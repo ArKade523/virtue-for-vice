@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://qibxtm3na3pn"]
+[gd_scene load_steps=20 format=3 uid="uid://dfd0nr26o1ko7"]
 
 [ext_resource type="Texture2D" uid="uid://820ivq74dlq6" path="res://Assets/Demon-Sheet.png" id="2_kspnq"]
 [ext_resource type="Script" path="res://Scripts/demon.gd" id="3_0kmue"]
+[ext_resource type="AudioStream" uid="uid://s7dg8fs0r6d0" path="res://Assets/Sounds-Music/dragon-roar-38093.mp3" id="3_cnbe7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sk83k"]
 atlas = ExtResource("2_kspnq")
@@ -150,6 +151,10 @@ position = Vector2(-6, -9)
 
 [node name="right" type="Marker2D" parent="."]
 position = Vector2(8, -9)
+
+[node name="Charge" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_cnbe7")
+bus = &"SFX"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="enemy_hit_box" to="." method="_on_enemy_hit_box_body_entered"]
