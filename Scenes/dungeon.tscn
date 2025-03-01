@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbw2hr0haa4li"]
+[gd_scene load_steps=8 format=3 uid="uid://bbw2hr0haa4li"]
 
 [ext_resource type="Texture2D" uid="uid://c5a5ewjiyxnu5" path="res://Assets/pixilart-drawing.png" id="1_57tqk"]
-[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_r0blr"]
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_r0blr"]
+[ext_resource type="Resource" uid="uid://eaw5jlml72wt" path="res://inventory/player1_inventory.tres" id="2_n51n8"]
 [ext_resource type="PackedScene" uid="uid://cssf3vvokj7rc" path="res://Scenes/enemy.tscn" id="3_c1n34"]
+[ext_resource type="PackedScene" uid="uid://b8dsvpplbp5y5" path="res://inventory/inventory_UI.tscn" id="4_wd4dj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2yl0p"]
 size = Vector2(86, 46)
@@ -11,18 +13,21 @@ size = Vector2(86, 46)
 
 [node name="Dungeon" type="Node2D"]
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="player1" type="CharacterBody2D" parent="."]
 motion_mode = 1
 script = ExtResource("1_r0blr")
+inventory = ExtResource("2_n51n8")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player1"]
 position = Vector2(-12, -161)
 shape = SubResource("RectangleShape2D_2yl0p")
 
-[node name="Pixilart-drawing" type="Sprite2D" parent="Player"]
+[node name="Pixilart-drawing" type="Sprite2D" parent="player1"]
 position = Vector2(47, -125)
 scale = Vector2(4.75, 4.75)
 texture = ExtResource("1_57tqk")
+
+[node name="inventory_UI" parent="player1" instance=ExtResource("4_wd4dj")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -327)
