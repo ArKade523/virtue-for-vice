@@ -1,7 +1,7 @@
 extends CharacterBody2D
-
-
+# player variables and constants
 const MOVEMENT_SPEED = 300.0
+@export var inventory:Inventory
 
 func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
