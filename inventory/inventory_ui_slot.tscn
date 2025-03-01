@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://o3qil26mtngy"]
+[gd_scene load_steps=3 format=3 uid="uid://cuauoo3nv4kd7"]
 
 [ext_resource type="Script" path="res://inventory/inventory_ui_slot.gd" id="1_7d1rg"]
 [ext_resource type="Texture2D" uid="uid://qji7vb01cy7p" path="res://Assets/inventory_assets/inventory-slot.png" id="1_xsm31"]
@@ -14,4 +14,13 @@ script = ExtResource("1_7d1rg")
 texture = ExtResource("1_xsm31")
 centered = false
 
-[node name="item_display" type="Sprite2D" parent="."]
+[node name="CenterContainer" type="CenterContainer" parent="."]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+
+[node name="Panel" type="Panel" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="item_display" type="Sprite2D" parent="CenterContainer/Panel"]
