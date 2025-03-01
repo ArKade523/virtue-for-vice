@@ -68,10 +68,6 @@ region = Rect2(576, 0, 32, 32)
 atlas = ExtResource("3_a51jg")
 region = Rect2(608, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j0xy0"]
-atlas = ExtResource("3_a51jg")
-region = Rect2(128, 0, 32, 32)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_pd65r"]
 atlas = ExtResource("3_a51jg")
 region = Rect2(640, 0, 32, 32)
@@ -91,6 +87,10 @@ region = Rect2(320, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_vfg83"]
 atlas = ExtResource("3_a51jg")
 region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0xy0"]
+atlas = ExtResource("3_a51jg")
+region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t5nkq"]
 atlas = ExtResource("3_a51jg")
@@ -181,14 +181,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_j0xy0")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_pd65r")
 }, {
 "duration": 1.0,
@@ -260,14 +252,6 @@ offset_bottom = -176.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(48, -160)
 sprite_frames = SubResource("SpriteFrames_jthdb")
-animation = &"attack_right"
-frame_progress = 0.281886
-
-[node name="sword_hit" type="Area2D" parent="AnimatedSprite2D"]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AnimatedSprite2D/sword_hit"]
-position = Vector2(-10, 9)
-scale = Vector2(1.15972, 1.26705)
-polygon = PackedVector2Array(12.0719, -16.574, 12.0719, 2.36771, 21.5569, 3.94619, 21.5569, -7.10314, 21.5569, -18.1525)
-
-[connection signal="area_entered" from="AnimatedSprite2D/sword_hit" to="." method="_on_sword_hit_area_entered"]
+animation = &"attack_down"
+frame = 1
+frame_progress = 0.539049
