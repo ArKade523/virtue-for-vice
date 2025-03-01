@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://02qpes16wdr2"]
+[gd_scene load_steps=8 format=3 uid="uid://02qpes16wdr2"]
 
 [ext_resource type="Texture2D" uid="uid://br6knds1mr6pl" path="res://Assets/tilesets/Dungeon_Tileset.png" id="1_11168"]
 [ext_resource type="Script" path="res://Scripts/hatch.gd" id="1_wej7d"]
@@ -10,6 +10,41 @@ region = Rect2(128, 48, 16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kfttw"]
 size = Vector2(14, 14)
 
+[sub_resource type="Animation" id="Animation_ic0k2"]
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackOverlay:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5607n"]
+resource_name = "fadeOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackOverlay:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m1fhs"]
+_data = {
+"RESET": SubResource("Animation_ic0k2"),
+"fadeOut": SubResource("Animation_5607n")
+}
+
 [node name="Area2D" type="Area2D"]
 script = ExtResource("1_wej7d")
 
@@ -18,3 +53,16 @@ texture = SubResource("AtlasTexture_vcs33")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_kfttw")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="BlackOverlay" type="ColorRect" parent="CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+offset_right = 10000.0
+offset_bottom = 10000.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer"]
+libraries = {
+"": SubResource("AnimationLibrary_m1fhs")
+}
