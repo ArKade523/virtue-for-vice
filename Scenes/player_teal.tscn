@@ -1,7 +1,8 @@
-[gd_scene load_steps=33 format=3 uid="uid://bddmie48n1ur1"]
+[gd_scene load_steps=34 format=3 uid="uid://bddmie48n1ur1"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_xd3fx"]
 [ext_resource type="Texture2D" uid="uid://b51rp1c6s4vwr" path="res://Assets/BluePrince.png" id="3_a51jg"]
+[ext_resource type="AudioStream" uid="uid://baweyk2kiypco" path="res://Assets/Sounds-Music/sword-sound-260274.mp3" id="4_44blb"]
 [ext_resource type="PackedScene" uid="uid://b8dsvpplbp5y5" path="res://inventory/inventory_UI.tscn" id="4_hubo7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2yl0p"]
@@ -273,6 +274,10 @@ position = Vector2(1.5, -1.5)
 shape = SubResource("RectangleShape2D_a11qd")
 
 [node name="attack_cooldown" type="Timer" parent="."]
+
+[node name="Sword_Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_44blb")
+bus = &"SFX"
 
 [connection signal="body_entered" from="player_hit" to="." method="_on_player_hit_body_entered"]
 [connection signal="body_exited" from="player_hit" to="." method="_on_player_hit_body_exited"]

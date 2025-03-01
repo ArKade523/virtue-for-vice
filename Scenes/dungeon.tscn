@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7avdxi2smub4"]
+[gd_scene load_steps=6 format=3 uid="uid://c7avdxi2smub4"]
 
 [ext_resource type="Texture2D" uid="uid://c5a5ewjiyxnu5" path="res://Assets/pixilart-drawing.png" id="1_57tqk"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_r0blr"]
-[ext_resource type="Resource" uid="uid://eaw5jlml72wt" path="res://inventory/player1_inventory.tres" id="2_n51n8"]
 [ext_resource type="PackedScene" uid="uid://b8dsvpplbp5y5" path="res://inventory/inventory_UI.tscn" id="4_wd4dj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2yl0p"]
@@ -17,7 +16,6 @@ normal = Vector2(-0.023642, -0.99972)
 collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_r0blr")
-inventory = ExtResource("2_n51n8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player1"]
 position = Vector2(-12, -161)

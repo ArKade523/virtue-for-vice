@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://gege51iuuuij"]
+
+[ext_resource type="AudioStream" uid="uid://qk64j1e2mt5x" path="res://Assets/Sounds-Music/Battle Symphony.mp3" id="1_vr2hm"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_vr2hm")
+autoplay = true
+bus = &"Music"
