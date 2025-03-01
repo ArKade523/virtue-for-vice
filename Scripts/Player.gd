@@ -1,12 +1,22 @@
 extends CharacterBody2D
 # player variables and constants
-const MOVEMENT_SPEED = 100.0
-var is_attacking = false
 var move_animations:Array = ["walk_up", "walk_down", "walk_left", "walk_right"]
-var direction_facing = 0 #up=0,down=1,left=2,right=3
 @export var inventory:Inventory
 
+	
+
+#player teal states
+const MOVEMENT_SPEED = GameState.MOVEMENT_SPEED
+var is_attacking = false
+var enemy_in_attack_range = false
+var enemy_attack_cooldown = true
+var direction_facing = 0 #up=0,down=1,left=2,right=3
+
+
 func _physics_process(delta):
+	
+	enemy_attack()
+	
 	if !is_attacking: # If attacking, do not change the animation
 		# Get the input direction and handle the movement/deceleration.
 		var input_direction = Vector2(
@@ -67,8 +77,26 @@ func play_attack_animation():
 
 	# Animation finished, return to idle
 	is_attacking = false
-
+	
+func player():
+	pass
 
 func _on_sword_hit_area_entered(area: Area2D) -> void:
 	if area.is_in_group("hurtbox"):
 		area.take_damage()
+
+func player_blue_attack():
+	print("took damage from blue player")
+	GameState.player_teal_heal
+
+func enemy_attack():
+	if enemy_in_attack_range:
+		print("player took damage")
+
+func _on_player_hit_body_entered(body: Node2D) -> void:
+	if body.has_method("enemy") or body.has_method("enemy-player"):
+		enemy_in_attack_range = true
+
+func _on_player_hit_body_exited(body: Node2D) -> void:
+	if body.has_method("enemy") or body.has_method("enemy-player"):
+		enemy_in_attack_range = false

@@ -31,6 +31,9 @@ func _process(delta):
 	if not result.is_empty():
 		update_direction(Vector2(result[0].point.x - position.x ,result[0].point.y - position.y))	
 	move_and_slide()
+	
+func enemy():
+	pass
 
 
 func _on_timer_timeout():
