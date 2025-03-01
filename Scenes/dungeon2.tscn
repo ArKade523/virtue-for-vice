@@ -691,7 +691,6 @@ tile_map_data = PackedByteArray("AAD8//7/AAAAAAkAAAAEAP7/AAAAAAkAAAAMAP7/AAAAAAk
 tile_set = SubResource("TileSet_q1oa6")
 
 [node name="player_teal" parent="." instance=ExtResource("2_ao3af")]
-z_index = 5
 position = Vector2(-165, 79)
 motion_mode = 0
 

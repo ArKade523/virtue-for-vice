@@ -26,12 +26,35 @@ var blue_current_attacking = false
 ##Other
 const FIREBOLT_DAMAGE = 15
 
-var next_dungeon_map = {
-	"dungeon1": "res://Scenes/dungeon2.tscn",
-	"dungeon2": "res://Scenes/dungeon1.tscn",
-}
+var next_dungeon_map = [
+	"res://Scenes/dungeon1.tscn",
+	"res://Scenes/dungeon2.tscn",
+	"res://Scenes/dungeon3.tscn",
+	"res://Scenes/dungeon1.tscn",
+]
 
-func get_next_level(current_level: String) -> PackedScene:
-	if next_dungeon_map.has(current_level):
-		return load(next_dungeon_map[current_level])  # Load the next level scene
-	return null  # No next level (end of game)
+var current_scene_container: Node2D
+var current_scene: int = 0
+var player_teal_health: int = 10
+var player_blue_health: int = 10
+
+func _ready():
+	current_scene_container = get_tree().get_first_node_in_group("current_area")
+	load_next_level()
+	
+#func _process(delta: float) -> void:
+
+func load_next_level():
+	if next_dungeon_map[current_scene]:
+		var next_scene = load(next_dungeon_map[current_scene]) as PackedScene
+		if !next_scene:
+			return
+		for child in current_scene_container.get_children():
+			child.queue_free()
+			print('child')
+			await child.tree_exited
+		
+		print('exited loop')
+		var instance = next_scene.instantiate()
+		current_scene_container.add_child(instance)
+		current_scene += 1
