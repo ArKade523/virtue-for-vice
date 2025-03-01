@@ -3,13 +3,13 @@ extends CharacterBody2D
 var move_animations:Array = ["walk_up", "walk_down", "walk_left", "walk_right"]
 	
 
-#player blue states
+#player teal states
 const MOVEMENT_SPEED = GameState.MOVEMENT_SPEED
 var is_attacking = false
 var enemy_in_attack_range = false
 var enemy_attack_cooldown = true
 var direction_facing = 0 #up=0,down=1,left=2,right=3
-var blue_attack_inprogress = false
+var teal_attack_inprogress = false
 
 var damage = 5
 
@@ -17,9 +17,9 @@ var damage = 5
 func _physics_process(delta):	
 	enemy_attack(damage)
 	
-	if GameState.blue_health <= 0:
-		GameState.blue_is_alive = false
-		GameState.blue_health = 0
+	if GameState.teal_health <= 0:
+		GameState.teal_is_alive = false
+		GameState.teal_health = 0
 		print("Player Blue has been killed...")
 		#TODO add stuff to respawn
 	
@@ -62,8 +62,8 @@ func _physics_process(delta):
 
 func play_attack_animation():
 	is_attacking = true
-	GameState.blue_current_attacking = true
-	blue_attack_inprogress = true
+	GameState.teal_current_attacking = true
+	teal_attack_inprogress = true
 	var attack_animation = ""
 	match direction_facing:
 		0: #facing up
@@ -90,14 +90,14 @@ func blue_player():
 	pass
 
 func player_blue_attack():
-	print("took damage from blue player")
-	GameState.player_blue_heal
+	print("took damage from Teal player")
+	GameState.player_teal_heal
 
 func enemy_attack(damage):
 	if enemy_in_attack_range and enemy_attack_cooldown:
-		GameState.blue_health -= damage
+		GameState.teal_health -= damage
 		enemy_attack_cooldown = false
-		print(GameState.blue_health)
+		print(GameState.teal_health)
 		$attack_cooldown.start() 
 
 func _on_player_hit_body_entered(body: Node2D) -> void:

@@ -256,7 +256,6 @@ shape = SubResource("RectangleShape2D_2yl0p")
 position = Vector2(48, -160)
 sprite_frames = SubResource("SpriteFrames_jthdb")
 animation = &"attack_right"
-frame_progress = 0.281886
 
 [node name="player_hit" type="Area2D" parent="."]
 position = Vector2(48, -160)
