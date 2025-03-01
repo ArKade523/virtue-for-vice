@@ -19,7 +19,6 @@ func _physics_process(delta):
 	velocity = input_direction * MOVEMENT_SPEED
 	match input_direction:
 		Vector2(1,0): #moving to the right
-			print("made it here")
 			$AnimatedSprite2D.play("walk_right")
 		Vector2(-1,0): #moving to the left
 			$AnimatedSprite2D.play("walk_left")
