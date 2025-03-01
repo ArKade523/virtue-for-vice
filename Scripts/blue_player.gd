@@ -16,10 +16,11 @@ var damage = 5
 
 func _physics_process(delta):	
 	enemy_attack(damage)
+	player_teal_attack()
 	
-	if GameState.teal_health <= 0:
-		GameState.teal_is_alive = false
-		GameState.teal_health = 0
+	if GameState.blue_health <= 0:
+		GameState.blue_is_alive = false
+		GameState.blue_health = 0
 		print("Player Blue has been killed...")
 		#TODO add stuff to respawn
 	
@@ -56,7 +57,6 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("blue_attack"):
 		play_attack_animation()
 	
-
 	#Move
 	move_and_slide()
 
@@ -89,9 +89,10 @@ func play_attack_animation():
 func blue_player():
 	pass
 
-func player_blue_attack():
-	print("took damage from Teal player")
-	GameState.player_teal_heal
+func player_teal_attack():
+	if enemy_in_attack_range and teal_attack_inprogress:
+		print("took damage from Teal player")
+		GameState.blue_health -= GameState.teal_damage
 
 func enemy_attack(damage):
 	if enemy_in_attack_range and enemy_attack_cooldown:
@@ -101,13 +102,16 @@ func enemy_attack(damage):
 		$attack_cooldown.start() 
 
 func _on_player_hit_body_entered(body: Node2D) -> void:
-	if body.has_method("enemy") or body.has_method("enemy-player"):
+	if body.has_method("enemy"): 
 		enemy_in_attack_range = true
+	if body.has_method("teal-player"):
+		enemy_in_attack_range = true
+		teal_attack_inprogress = true
 	if body.has_method("firebolt"):
 		damage = GameState.FIREBOLT_DAMAGE
 
 func _on_player_hit_body_exited(body: Node2D) -> void:
-	if body.has_method("enemy") or body.has_method("enemy-player"):
+	if body.has_method("enemy") or body.has_method("teal-player"):
 		enemy_in_attack_range = false
 
 func _on_attack_cooldown_timeout() -> void:

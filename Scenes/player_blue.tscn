@@ -254,3 +254,6 @@ position = Vector2(1.5, -1.5)
 shape = SubResource("RectangleShape2D_jey56")
 
 [node name="attack_cooldown" type="Timer" parent="."]
+
+[connection signal="body_entered" from="player_hit" to="." method="_on_player_hit_body_entered"]
+[connection signal="body_exited" from="player_hit" to="." method="_on_player_hit_body_exited"]
