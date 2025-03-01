@@ -13,10 +13,10 @@ func _physics_process(delta):
 			Input.get_action_strength("right")- Input.get_action_strength("left"),
 			Input.get_action_strength("down") - Input.get_action_strength("up")
 		)
-		
+			
 		#Update Movement Speed
 		velocity = input_direction.normalized() * MOVEMENT_SPEED
-		
+			
 		#Runs the walking animations
 		match input_direction:
 			Vector2(0,-1): #moving up
@@ -33,24 +33,13 @@ func _physics_process(delta):
 				$AnimatedSprite2D.play(move_animations[3])
 			Vector2(0,0):
 				$AnimatedSprite2D.stop()
+		#Update Movement Speed
+		velocity = input_direction * MOVEMENT_SPEED
 
 	#Attack Animations and logic
 	if Input.is_action_just_pressed("attack"):
 		play_attack_animation()
 	
-	#Update Movement Speed
-	velocity = input_direction * MOVEMENT_SPEED
-	match input_direction:
-		Vector2(1,0): #moving to the right
-			$AnimatedSprite2D.play("walk_right")
-		Vector2(-1,0): #moving to the left
-			$AnimatedSprite2D.play("walk_left")
-		Vector2(0,1): #moving down
-			$AnimatedSprite2D.play("walk_down")
-		Vector2(0,-1): #moving up
-			$AnimatedSprite2D.play("walk_up")
-		Vector2(0,0):
-			$AnimatedSprite2D.stop()
 
 	#Move
 	move_and_slide()
