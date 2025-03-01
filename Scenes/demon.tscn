@@ -1,0 +1,156 @@
+[gd_scene load_steps=19 format=3 uid="uid://qibxtm3na3pn"]
+
+[ext_resource type="Texture2D" uid="uid://820ivq74dlq6" path="res://Assets/Demon-Sheet.png" id="2_kspnq"]
+[ext_resource type="Script" path="res://Scripts/demon.gd" id="3_0kmue"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sk83k"]
+atlas = ExtResource("2_kspnq")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hyc2x"]
+atlas = ExtResource("2_kspnq")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdugr"]
+atlas = ExtResource("2_kspnq")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lqtm5"]
+atlas = ExtResource("2_kspnq")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g72rh"]
+atlas = ExtResource("2_kspnq")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tau8t"]
+atlas = ExtResource("2_kspnq")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wr8g8"]
+atlas = ExtResource("2_kspnq")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_foy6a"]
+atlas = ExtResource("2_kspnq")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f845h"]
+atlas = ExtResource("2_kspnq")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vgra"]
+atlas = ExtResource("2_kspnq")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_705s2"]
+atlas = ExtResource("2_kspnq")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_22jpn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sk83k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hyc2x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdugr")
+}],
+"loop": true,
+"name": &"back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lqtm5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g72rh")
+}],
+"loop": true,
+"name": &"front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tau8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wr8g8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_foy6a")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f845h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vgra")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_705s2")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2aecj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qwopl"]
+radius = 593.77
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ok75h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qc45a"]
+radius = 11.0
+
+[node name="Demon" type="CharacterBody2D"]
+script = ExtResource("3_0kmue")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_22jpn")
+animation = &"right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_2aecj")
+
+[node name="locator" type="ShapeCast2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_qwopl")
+target_position = Vector2(0, 0)
+collision_mask = 2
+
+[node name="range" type="ShapeCast2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_ok75h")
+collision_mask = 2
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="enemy_hit_box" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_hit_box" groups=["enemies"]]
+position = Vector2(2, 0)
+shape = SubResource("CircleShape2D_qc45a")
+
+[node name="default" type="Marker2D" parent="."]
+position = Vector2(-6, -9)
+
+[node name="right" type="Marker2D" parent="."]
+position = Vector2(8, -9)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="enemy_hit_box" to="." method="_on_enemy_hit_box_body_entered"]
+[connection signal="body_exited" from="enemy_hit_box" to="." method="_on_enemy_hit_box_body_exited"]
