@@ -23,6 +23,9 @@ var blue_attributes = ["handsome","dashing","considerate","good-personality","sh
 #state
 var blue_current_attacking = false
 
+##Other
+const FIREBOLT_DAMAGE = 15
+
 var next_dungeon_map = {
 	"dungeon1": "res://Scenes/dungeon2.tscn",
 	"dungeon2": "res://Scenes/dungeon1.tscn",

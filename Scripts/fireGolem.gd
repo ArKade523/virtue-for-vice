@@ -42,7 +42,7 @@ func update_direction(direction):
 	range.target_position.y = angle.y * 50
 
 func _on_timer_timeout():
-	print("YOU WORKING?")
+	#print("YOU WORKING?")
 	projectile()
 	
 	

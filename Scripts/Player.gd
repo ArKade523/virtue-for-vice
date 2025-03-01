@@ -13,9 +13,11 @@ var enemy_attack_cooldown = true
 var direction_facing = 0 #up=0,down=1,left=2,right=3
 var teal_attack_inprogress = false
 
+var damage = 5
+
 
 func _physics_process(delta):	
-	enemy_attack()
+	enemy_attack(damage)
 	
 	if GameState.teal_health <= 0:
 		GameState.teal_is_alive = false
@@ -93,9 +95,9 @@ func player_blue_attack():
 	print("took damage from blue player")
 	GameState.player_teal_heal
 
-func enemy_attack():
+func enemy_attack(damage):
 	if enemy_in_attack_range and enemy_attack_cooldown:
-		GameState.teal_health -= 5
+		GameState.teal_health -= damage
 		enemy_attack_cooldown = false
 		print(GameState.teal_health)
 		$attack_cooldown.start() 
@@ -103,6 +105,8 @@ func enemy_attack():
 func _on_player_hit_body_entered(body: Node2D) -> void:
 	if body.has_method("enemy") or body.has_method("enemy-player"):
 		enemy_in_attack_range = true
+	if body.has_method("firebolt"):
+		damage = GameState.FIREBOLT_DAMAGE
 
 func _on_player_hit_body_exited(body: Node2D) -> void:
 	if body.has_method("enemy") or body.has_method("enemy-player"):
