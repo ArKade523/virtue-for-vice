@@ -241,7 +241,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a11qd"]
-size = Vector2(10, 24)
+size = Vector2(21, 27)
 
 [node name="player_teal" type="CharacterBody2D"]
 z_index = 5
@@ -269,6 +269,7 @@ frame_progress = 0.281886
 position = Vector2(48, -160)
 
 [node name="player_hit_box" type="CollisionShape2D" parent="player_hit"]
+position = Vector2(1.5, -1.5)
 shape = SubResource("RectangleShape2D_a11qd")
 
 [node name="attack_cooldown" type="Timer" parent="."]

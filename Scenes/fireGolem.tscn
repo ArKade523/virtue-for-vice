@@ -270,7 +270,7 @@ radius = 593.77
 [sub_resource type="CircleShape2D" id="CircleShape2D_ok75h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qc45a"]
-radius = 9.0
+radius = 17.0
 
 [node name="FireGolem" type="CharacterBody2D"]
 script = ExtResource("1_b8hbb")
@@ -299,11 +299,15 @@ collision_mask = 2
 wait_time = 2.0
 autostart = true
 
+[node name="DamageTimer" type="Timer" parent="." groups=["enemies"]]
+wait_time = 0.2
+autostart = true
+
 [node name="enemy_hit_box" type="Area2D" parent="."]
 collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_hit_box"]
-position = Vector2(0, 4)
+position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_qc45a")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
