@@ -64,3 +64,8 @@ func play_attack_animation():
 
 	# Animation finished, return to idle
 	is_attacking = false
+
+
+func _on_sword_hit_area_entered(area: Area2D) -> void:
+	if area.is_in_group("hurtbox"):
+		area.take_damage()

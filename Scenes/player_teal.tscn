@@ -260,4 +260,14 @@ offset_bottom = -176.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(48, -160)
 sprite_frames = SubResource("SpriteFrames_jthdb")
-animation = &"attack_up"
+animation = &"attack_right"
+frame_progress = 0.281886
+
+[node name="sword_hit" type="Area2D" parent="AnimatedSprite2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AnimatedSprite2D/sword_hit"]
+position = Vector2(-10, 9)
+scale = Vector2(1.15972, 1.26705)
+polygon = PackedVector2Array(12.0719, -16.574, 12.0719, 2.36771, 21.5569, 3.94619, 21.5569, -7.10314, 21.5569, -18.1525)
+
+[connection signal="area_entered" from="AnimatedSprite2D/sword_hit" to="." method="_on_sword_hit_area_entered"]
