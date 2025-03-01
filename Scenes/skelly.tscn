@@ -10,7 +10,7 @@ radius = 600.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f7li3"]
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Skeleton" type="CharacterBody2D"]
 script = ExtResource("1_hpbit")
 
 [node name="Locator" type="ShapeCast2D" parent="."]
