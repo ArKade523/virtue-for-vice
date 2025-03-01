@@ -7,6 +7,7 @@ const MOVEMENT_SPEED = 150
 @onready var locator = $Locator
 @onready var range = $range
 @onready var arrow = "res://Scenes/arrow.tscn"
+
 var x_mov = 0
 var y_mov = 0
 
