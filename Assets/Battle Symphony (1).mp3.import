@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cuw06t7l8qpe7"
+path="res://.godot/imported/Battle Symphony (1).mp3-083beacabf191690ed2a58d2de638e90.mp3str"
+
+[deps]
+
+source_file="res://Assets/Battle Symphony (1).mp3"
+dest_files=["res://.godot/imported/Battle Symphony (1).mp3-083beacabf191690ed2a58d2de638e90.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
