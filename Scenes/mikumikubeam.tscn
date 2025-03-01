@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bbdsri60g5tkh"]
+[gd_scene load_steps=7 format=3 uid="uid://brjqnf6m422a7"]
 
 [ext_resource type="Texture2D" uid="uid://b2nlmvhikrb28" path="res://Assets/BossBeam.png" id="2_gh5p1"]
 [ext_resource type="Script" path="res://Scripts/mikumikubeam.gd" id="3_m5elq"]
