@@ -712,7 +712,7 @@ position = Vector2(182, 519)
 position = Vector2(-389, 249)
 
 [node name="escape_hatch" parent="." instance=ExtResource("4_p22gv")]
-position = Vector2(379, -537)
+position = Vector2(395, 141)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player_1", "player_2")]
 position_smoothing_enabled = true
