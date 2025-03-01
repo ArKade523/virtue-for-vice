@@ -711,4 +711,4 @@ position = Vector2(182, 519)
 position = Vector2(-389, 249)
 
 [node name="escape_hatch" parent="." instance=ExtResource("4_p22gv")]
-position = Vector2(379, -537)
+position = Vector2(406, 144)
