@@ -43,13 +43,16 @@ func _ready():
 func _process(_delta: float) -> void:
 	var teal_health_bar = get_tree().get_first_node_in_group("teal_health")
 	var blue_health_bar = get_tree().get_first_node_in_group("blue_health")
-	teal_health_bar.value = float(teal_health / MAX_HEALTH) * 100
-	blue_health_bar.value = float(blue_health / MAX_HEALTH) * 100
+	if (teal_health_bar and blue_health_bar):
+		teal_health_bar.value = float(teal_health / MAX_HEALTH) * 100
+		blue_health_bar.value = float(blue_health / MAX_HEALTH) * 100
 
 func load_next_level():
 	if next_dungeon_map[current_scene]:
 		var next_scene = load(next_dungeon_map[current_scene]) as PackedScene
 		if !next_scene:
+			return
+		if !current_scene_container:
 			return
 		for child in current_scene_container.get_children():
 			child.queue_free()
