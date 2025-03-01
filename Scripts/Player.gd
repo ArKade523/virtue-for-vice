@@ -1,11 +1,7 @@
 extends CharacterBody2D
 
 
-const SPEED = 300.0
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
+const MOVEMENT_SPEED = 300.0
 
 func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
@@ -13,12 +9,12 @@ func _physics_process(delta):
 	var hor_direction = Input.get_axis("ui_left", "ui_right")
 	var ver_direction = Input.get_axis("ui_up", "ui_down")
 	if hor_direction:
-		velocity.x = hor_direction * SPEED
+		velocity.x = hor_direction * MOVEMENT_SPEED
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.x = move_toward(velocity.x, 0, MOVEMENT_SPEED)
 	if ver_direction:
-		velocity.y = ver_direction * SPEED
+		velocity.y = ver_direction * MOVEMENT_SPEED
 	else:
-		velocity.y = move_toward(velocity.y, 0, SPEED)
+		velocity.y = move_toward(velocity.y, 0, MOVEMENT_SPEED)
 
 	move_and_slide()
