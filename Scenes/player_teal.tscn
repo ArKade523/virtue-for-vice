@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bddmie48n1ur1"]
+[gd_scene load_steps=32 format=3 uid="uid://bddmie48n1ur1"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_xd3fx"]
 [ext_resource type="Texture2D" uid="uid://b51rp1c6s4vwr" path="res://Assets/BluePrince.png" id="3_a51jg"]

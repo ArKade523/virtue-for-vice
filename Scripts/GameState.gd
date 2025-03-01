@@ -16,7 +16,6 @@ var blue_is_alive = true
 var blue_attributes = ["handsome","dashing","considerate","good-personality","short-nose-hairs", "trimmed-toenails"]
 
 
-
 var next_dungeon_map = {
 	"dungeon1": "res://Scenes/dungeon2.tscn",
 	"dungeon2": "res://Scenes/dungeon1.tscn",
