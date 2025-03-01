@@ -1,20 +1,20 @@
 extends CharacterBody2D
-
-
+# player variables and constants
 const MOVEMENT_SPEED = 300.0
+@export var inventory:Inventory
 
 func _physics_process(delta):
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var hor_direction = Input.get_axis("ui_left", "ui_right")
-	var ver_direction = Input.get_axis("ui_up", "ui_down")
-	if hor_direction:
-		velocity.x = hor_direction * MOVEMENT_SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, MOVEMENT_SPEED)
-	if ver_direction:
-		velocity.y = ver_direction * MOVEMENT_SPEED
-	else:
-		velocity.y = move_toward(velocity.y, 0, MOVEMENT_SPEED)
-
+	var input_direction = Vector2(
+		Input.get_action_strength("right")- Input.get_action_strength("left"),
+		Input.get_action_strength("down") - Input.get_action_strength("up")
+	)
+	
+	#Update Movement Speed
+	velocity = input_direction * MOVEMENT_SPEED
+	
+	#Move
 	move_and_slide()
+	
+	#TODO need to add actions for attack and possible roll? Do I do that here?
