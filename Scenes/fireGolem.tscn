@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://d4kgi4ntnsgil"]
+[gd_scene load_steps=33 format=3 uid="uid://d4kgi4ntnsgil"]
 
 [ext_resource type="Script" path="res://Scripts/fireGolem.gd" id="1_b8hbb"]
 [ext_resource type="Texture2D" uid="uid://bds5dfqabp31q" path="res://Assets/LavaGolem.png" id="2_0e1n4"]
@@ -266,6 +266,9 @@ radius = 593.77
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ok75h"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_qc45a"]
+radius = 6.0
+
 [node name="FireGolem" type="CharacterBody2D"]
 script = ExtResource("1_b8hbb")
 
@@ -291,4 +294,13 @@ collision_mask = 2
 wait_time = 2.0
 autostart = true
 
+[node name="enemy_hit_box" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy_hit_box"]
+position = Vector2(-1, -14)
+shape = SubResource("CircleShape2D_qc45a")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="enemy_hit_box" to="." method="_on_enemy_hit_box_body_entered"]
+[connection signal="body_exited" from="enemy_hit_box" to="." method="_on_enemy_hit_box_body_exited"]
