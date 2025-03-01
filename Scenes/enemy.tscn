@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cssf3vvokj7rc"]
+
+[ext_resource type="Texture2D" uid="uid://cl84llsmu3ukj" path="res://Assets/pixil-frame-0.png" id="1_rvc85"]
+[ext_resource type="Script" path="res://Scenes/enemy.gd" id="1_te1oe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2ejwo"]
+radius = 12.1655
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t1ti1"]
+size = Vector2(39, 152)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_te1oe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(20, -3)
+scale = Vector2(1.69, 1.69)
+texture = ExtResource("1_rvc85")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -14)
+shape = SubResource("CircleShape2D_2ejwo")
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+position = Vector2(1, -12)
+shape = SubResource("RectangleShape2D_t1ti1")
+target_position = Vector2(157, -1)
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
