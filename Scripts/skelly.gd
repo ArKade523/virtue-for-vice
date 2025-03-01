@@ -6,7 +6,7 @@ const MOVEMENT_SPEED = 150
 @onready var timer = $Timer
 @onready var locator = $Locator
 @onready var range = $range
-
+@onready var arrow = "res://Scenes/arrow.tscn"
 var x_mov = 0
 var y_mov = 0
 
@@ -33,3 +33,13 @@ func update_direction(direction: Vector2):
 		y_mov = angle.y * MOVEMENT_SPEED
 	range.target_position.x = angle.x * 50
 	range.target_position.y = angle.y * 50
+
+
+func _on_timer_timeout():
+	projectile()
+	
+func projectile():
+	var result: Array = locator.collision_result
+	if not result.is_empty():
+		var bullet = arrow.instantiate()
+		bullet.rotation = Vector2(result[0].point.x - position.x, result[0].point.y - position.y).angle()
