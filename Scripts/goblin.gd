@@ -14,9 +14,7 @@ func _process(delta):
 	velocity.y = y_mov
 	var result: Array = view.collision_result
 	if not result.is_empty():
-		update_direction(Vector2(result[0].point.x - position.x ,result[0].point.y - position.y))
-		print("collided with: " + str(result[0].point.y))
-		print("collided with: " + str(result[0].point.x))		
+		update_direction(Vector2(result[0].point.x - position.x ,result[0].point.y - position.y))	
 	move_and_slide()
 
 
