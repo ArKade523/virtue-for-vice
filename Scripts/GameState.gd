@@ -28,9 +28,13 @@ const FIREBOLT_DAMAGE = 15
 
 var next_dungeon_map = [
 	"res://Scenes/start_screen.tscn",
+	"res://Scenes/story.tscn",
 	"res://Scenes/dungeon1.tscn",
+	"res://Scenes/level1end.tscn",
 	"res://Scenes/dungeon2.tscn",
+	"res://Scenes/level2end.tscn",
 	"res://Scenes/dungeon3.tscn",
+	"res://Scenes/victory.tscn",
 	"res://Scenes/dungeon1.tscn",
 ]
 
