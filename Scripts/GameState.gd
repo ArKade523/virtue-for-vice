@@ -29,15 +29,20 @@ const FIREBOLT_DAMAGE = 15
 var next_dungeon_map = [
 	"res://Scenes/dungeon1.tscn",
 	"res://Scenes/dungeon2.tscn",
+	"res://Scenes/dungeon3.tscn",
 	"res://Scenes/dungeon1.tscn",
 ]
 
 var current_scene_container: Node2D
 var current_scene: int = 0
+var player_teal_health: int = 10
+var player_blue_health: int = 10
 
 func _ready():
 	current_scene_container = get_tree().get_first_node_in_group("current_area")
 	load_next_level()
+	
+#func _process(delta: float) -> void:
 
 func load_next_level():
 	if next_dungeon_map[current_scene]:

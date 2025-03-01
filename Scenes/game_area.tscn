@@ -1,5 +1,15 @@
-[gd_scene format=3 uid="uid://b8knk5jy374yi"]
+[gd_scene load_steps=2 format=3 uid="uid://b8knk5jy374yi"]
+
+[ext_resource type="PackedScene" uid="uid://ccytdhtvarde7" path="res://Scenes/hud.tscn" id="1_mrwjm"]
 
 [node name="GameArea" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource("1_mrwjm")]
+offset_left = 31.6998
+offset_top = 6.5492
+offset_right = 31.6997
+offset_bottom = 6.54919
 
 [node name="CurrentScene" type="Node2D" parent="." groups=["current_area"]]

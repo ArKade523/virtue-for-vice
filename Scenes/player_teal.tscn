@@ -244,6 +244,7 @@ animations = [{
 size = Vector2(10, 24)
 
 [node name="player_teal" type="CharacterBody2D"]
+z_index = 5
 collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_xd3fx")
