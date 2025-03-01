@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b8knk5jy374yi"]
+[gd_scene load_steps=2 format=3 uid="uid://q807jo2extut"]
 
-[ext_resource type="PackedScene" uid="uid://ccytdhtvarde7" path="res://Scenes/hud.tscn" id="1_mrwjm"]
+[ext_resource type="PackedScene" uid="uid://dy5oujp4cp4pv" path="res://Scenes/hud.tscn" id="1_mrwjm"]
 
 [node name="GameArea" type="Node2D"]
 
