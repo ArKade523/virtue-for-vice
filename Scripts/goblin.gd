@@ -14,9 +14,7 @@ func _process(delta):
 	velocity.y = y_mov
 	var result: Array = view.collision_result
 	if not result.is_empty():
-		update_direction(Vector2(result[0].point.x - position.x ,result[0].point.y - position.y))
-		print("collided with: " + str(result[0].point.y))
-		print("collided with: " + str(result[0].point.x))		
+		update_direction(Vector2(result[0].point.x - position.x ,result[0].point.y - position.y))	
 	move_and_slide()
 
 
@@ -26,7 +24,6 @@ func _on_timer_timeout():
 
 func update_direction(direction):
 	var angle = direction.normalized()
-	print(angle.x)
 	x_mov = angle.x * MOVEMENT_SPEED
 	y_mov = angle.y * MOVEMENT_SPEED
 	view.target_position.x = angle.x * 150
