@@ -1,7 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://bddmie48n1ur1"]
+[gd_scene load_steps=34 format=3 uid="uid://bddmie48n1ur1"]
 
 [ext_resource type="Script" path="res://Scripts/teal_player.gd" id="1_dctm1"]
-[ext_resource type="Texture2D" uid="uid://b15bi0a0ov4pj" path="res://Assets/BluePrince.png" id="3_a51jg"]
+[ext_resource type="Resource" uid="uid://eaw5jlml72wt" path="res://inventory/player_teal_inventory.tres" id="2_xipij"]
+[ext_resource type="Texture2D" uid="uid://b51rp1c6s4vwr" path="res://Assets/BluePrince.png" id="3_a51jg"]
+[ext_resource type="PackedScene" uid="uid://b8dsvpplbp5y5" path="res://inventory/inventory_UI.tscn" id="4_hubo7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2yl0p"]
 size = Vector2(9, 12.625)
@@ -66,6 +68,10 @@ region = Rect2(576, 0, 32, 32)
 atlas = ExtResource("3_a51jg")
 region = Rect2(608, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0xy0"]
+atlas = ExtResource("3_a51jg")
+region = Rect2(128, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_pd65r"]
 atlas = ExtResource("3_a51jg")
 region = Rect2(640, 0, 32, 32)
@@ -85,10 +91,6 @@ region = Rect2(320, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_vfg83"]
 atlas = ExtResource("3_a51jg")
 region = Rect2(352, 0, 32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j0xy0"]
-atlas = ExtResource("3_a51jg")
-region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t5nkq"]
 atlas = ExtResource("3_a51jg")
@@ -179,19 +181,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_00axc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t3jf1")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4tms7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6kd6m")
+"texture": SubResource("AtlasTexture_j0xy0")
 }],
 "loop": true,
-"name": &"death",
+"name": &"idle",
 "speed": 5.0
 }, {
 "frames": [{
@@ -249,28 +242,34 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a11qd"]
-size = Vector2(21, 27)
+size = Vector2(10, 24)
 
 [node name="player_teal" type="CharacterBody2D"]
-z_index = 5
 collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_dctm1")
+inventory = ExtResource("2_xipij")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(47.5, -153.688)
 shape = SubResource("RectangleShape2D_2yl0p")
 
+[node name="inventory_UI" parent="." instance=ExtResource("4_hubo7")]
+offset_left = 1.0
+offset_top = -219.0
+offset_right = 101.0
+offset_bottom = -176.0
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(48, -160)
 sprite_frames = SubResource("SpriteFrames_jthdb")
-animation = &"death"
+animation = &"attack_right"
+frame_progress = 0.281886
 
 [node name="player_hit" type="Area2D" parent="."]
 position = Vector2(48, -160)
 
 [node name="player_hit_box" type="CollisionShape2D" parent="player_hit"]
-position = Vector2(1.5, -1.5)
 shape = SubResource("RectangleShape2D_a11qd")
 
 [node name="attack_cooldown" type="Timer" parent="."]
