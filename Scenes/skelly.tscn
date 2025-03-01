@@ -1,7 +1,13 @@
+<<<<<<< HEAD
 [gd_scene load_steps=6 format=3 uid="uid://g0oueecqu57b"]
 
 [ext_resource type="Script" path="res://Scripts/skelly.gd" id="1_hpbit"]
 [ext_resource type="Texture2D" uid="uid://cl84llsmu3ukj" path="res://Assets/pixil-frame-0.png" id="2_6b4pa"]
+=======
+[gd_scene load_steps=5 format=3 uid="uid://g0oueecqu57b"]
+
+[ext_resource type="Script" path="res://Scripts/skelly.gd" id="1_hpbit"]
+>>>>>>> 1b16acd8cf49dfcc7bd881162748691d28057ee8
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8y771"]
 radius = 600.0
@@ -10,7 +16,11 @@ radius = 600.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f7li3"]
 
+<<<<<<< HEAD
 [node name="Skeleton" type="CharacterBody2D"]
+=======
+[node name="CharacterBody2D" type="CharacterBody2D"]
+>>>>>>> 1b16acd8cf49dfcc7bd881162748691d28057ee8
 script = ExtResource("1_hpbit")
 
 [node name="Locator" type="ShapeCast2D" parent="."]
@@ -19,8 +29,11 @@ target_position = Vector2(0, 0)
 collision_mask = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+<<<<<<< HEAD
 position = Vector2(12, 9)
 texture = ExtResource("2_6b4pa")
+=======
+>>>>>>> 1b16acd8cf49dfcc7bd881162748691d28057ee8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_fn22y")
