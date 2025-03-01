@@ -1,11 +1,17 @@
 extends Control
 
-#to check if inventory is open or closed
-var is_open = false
+@onready var inventory:Inventory = preload("res://inventory/player1_inventory.tres")
+@onready var slots:Array = $NinePatchRect/GridContainer.get_children()
+var is_open = false 
 
 #Ready function is how you do stuff on game startup (I think)
 func _ready():
+	update_slots()
 	close_inventory()
+	
+func update_slots():
+	for i in range(min(inventory.items.size(), slots.size())):
+		slots[i].update(inventory.items[i])
 	
 #_process function is how you grab input
 func _process(delta: float) -> void:

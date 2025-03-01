@@ -28,6 +28,10 @@ scale = Vector2(4.75, 4.75)
 texture = ExtResource("1_57tqk")
 
 [node name="inventory_UI" parent="player1" instance=ExtResource("4_wd4dj")]
+offset_left = -60.0
+offset_top = -228.0
+offset_right = 40.0
+offset_bottom = -185.0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -327)
