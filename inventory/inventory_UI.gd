@@ -9,7 +9,7 @@ func _ready():
 	
 #_process function is how you grab input
 func _process(delta: float) -> void:
-	if Input.get_action_strength("open_inventory"):
+	if Input.is_action_just_pressed("open_inventory"):
 		if is_open:
 			close_inventory()
 		else:
