@@ -1,12 +1,16 @@
 extends CharacterBody2D
 
-
+#creature stats
 const MOVEMENT_SPEED = 100
+var health = 140
 
 @onready var timer = $Timer
 @onready var locator = $locator
 @onready var range = $range
 @onready var fireBolt = preload("res://Scenes/fireBolt.tscn")
+#players
+var teal_in_attack_zone = false
+var blue_in_attack_zone = false
 
 
 var x_mov = 0
@@ -38,7 +42,7 @@ func update_direction(direction):
 	range.target_position.y = angle.y * 50
 
 func _on_timer_timeout():
-	print("YOU WORKING?")
+	#print("YOU WORKING?")
 	projectile()
 	
 	
@@ -54,4 +58,21 @@ func projectile():
 		
 		
 		get_parent().add_child(bullet)  # Add to the scene
+
 	
+func deal_with_damage():
+	if (teal_in_attack_zone and GameState.teal_current_attacking) or (blue_in_attack_zone and GameState.blue_current_attacking):
+		health -= GameState.BASE_DAMAGE
+		print("Golem health =", health)
+		if health <= 0:
+			self.queue_free()
+
+
+func _on_enemy_hit_box_body_entered(body: Node2D) -> void:
+	if body.has_method("teal_player"):
+		teal_in_attack_zone = true
+	
+
+func _on_enemy_hit_box_body_exited(body: Node2D) -> void:
+	if body.has_method("teal_player"):
+		teal_in_attack_zone = false
