@@ -1,7 +1,14 @@
 extends CharacterBody2D
 # player variables and constants
+<<<<<<< Updated upstream
 var move_animations:Array = ["walk_up", "walk_down", "walk_left", "walk_right"]
 @export var inventory:Inventory
+=======
+const MOVEMENT_SPEED = 200
+#@export var inventory:Inventory
+
+sound.play()
+>>>>>>> Stashed changes
 
 	
 
