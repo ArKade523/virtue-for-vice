@@ -40,6 +40,10 @@ var current_scene: int = 0
 func _ready():
 	current_scene_container = get_tree().get_first_node_in_group("current_area")
 	load_next_level()
+	var teal_health_bar = get_tree().get_first_node_in_group("teal_health")
+	var blue_health_bar = get_tree().get_first_node_in_group("blue_health")
+	teal_health_bar.visible = false
+	blue_health_bar.visible = false
 	
 func _process(_delta: float) -> void:
 	var teal_health_bar = get_tree().get_first_node_in_group("teal_health")
@@ -62,3 +66,8 @@ func load_next_level():
 		var instance = next_scene.instantiate()
 		current_scene_container.add_child(instance)
 		current_scene += 1
+		if current_scene > 0:
+			var teal_health_bar = get_tree().get_first_node_in_group("teal_health")
+			var blue_health_bar = get_tree().get_first_node_in_group("blue_health")
+			teal_health_bar.visible = true
+			blue_health_bar.visible = true

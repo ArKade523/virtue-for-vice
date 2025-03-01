@@ -2,7 +2,7 @@ extends Camera2D
 
 @export var player_1: Node2D
 @export var player_2: Node2D
-@export var min_zoom: float = 2.5  # Closest zoom-in
+@export var min_zoom: float = 3.5  # Closest zoom-in
 @export var max_zoom: float = 5.0  # Farthest zoom-out
 @export var zoom_speed: float = 5.0  # How fast zoom adjusts
 @export var padding: float = 200.0  # Extra space around players
