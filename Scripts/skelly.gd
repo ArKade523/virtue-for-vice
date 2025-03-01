@@ -35,7 +35,6 @@ func update_direction(direction: Vector2):
 	range.target_position.x = angle.x * 50
 	range.target_position.y = angle.y * 50
 
-
 func _on_timer_timeout():
 	projectile()
 	
