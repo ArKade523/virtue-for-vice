@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=4 uid="uid://diqybokfyygg4"]
+[gd_scene load_steps=10 format=4 uid="uid://diqybokfyygg4"]
 
 [ext_resource type="Texture2D" uid="uid://br6knds1mr6pl" path="res://Assets/tilesets/Dungeon_Tileset.png" id="1_3sbh4"]
-[ext_resource type="PackedScene" uid="uid://byqefgw7xjfod" path="res://Scenes/player_teal.tscn" id="2_3ubug"]
+[ext_resource type="PackedScene" uid="uid://bddmie48n1ur1" path="res://Scenes/player_teal.tscn" id="2_3ubug"]
 [ext_resource type="PackedScene" uid="uid://02qpes16wdr2" path="res://Scenes/hatch.tscn" id="3_fff5a"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ys2oc"]
@@ -685,6 +685,7 @@ tile_map_data = PackedByteArray("AAABAAMAAAAHAAEAAAABAAIAAAABAAcAAAABAAEAAAACAAI
 tile_set = SubResource("TileSet_sgk7q")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(16, 0)
 tile_map_data = PackedByteArray("AAD1//X/AAAAAAkAAAACAPj/AAAAAAkAAAD7//X/AAAAAAkAAAAFAPv/AAABAAkAABAHAAAAAAABAAkAABD7/wAAAAABAAkAAAD1//z/AAABAAkAAADz//j/AAABAAkAAAAHAAEAAAAJAAQAAAAAAP3/AAAJAAQAAAD1//n/AAAJAAQAAAD4//b/AAAJAAQAAAD8//3/AAAJAAQAAAD4//v/AAAJAAQAAAD//wIAAAAJAAQAAAAEAAAAAAAJAAUAAAAAAP7/AAAJAAUAAAABAP3/AAAJAAUAAAD5//v/AAAJAAUAAAD1//r/AAAJAAUAAAD3//f/AAAJAAUAABD+/wIAAAAJAAUAAAD9//7/AAAJAAUAAAD+//r/AAAJAAUAAAAFAP7/AAAHAAcAAAD7/wIAAAAHAAcAABDz//b/AAAHAAcAABD///b/AAAHAAcAAAA=")
 tile_set = SubResource("TileSet_2mj68")
 

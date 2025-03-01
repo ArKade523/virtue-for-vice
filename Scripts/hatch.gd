@@ -26,9 +26,7 @@ func _fade_to_black(body):
 	animation_player.play("fadeOut")
 
 	await animation_player.animation_finished
-	var next_scene = GameState.get_next_level(get_tree().current_scene.name)
-	if next_scene:
-		get_tree().change_scene_to_packed(next_scene)
+	GameState.load_next_level()
 
 func change_tile(tileset_texture: Texture2D, new_region: Rect2):
 	var atlas_texture = AtlasTexture.new()
