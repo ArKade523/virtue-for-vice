@@ -27,6 +27,7 @@ var blue_current_attacking = false
 const FIREBOLT_DAMAGE = 15
 
 var next_dungeon_map = [
+	"res://Scenes/start_screen.tscn",
 	"res://Scenes/dungeon1.tscn",
 	"res://Scenes/dungeon2.tscn",
 	"res://Scenes/dungeon3.tscn",
@@ -58,8 +59,8 @@ func load_next_level():
 		var next_scene = load(next_dungeon_map[current_scene]) as PackedScene
 		if !next_scene:
 			return
-		if !current_scene_container:
-			return
+		if (!current_scene_container):
+			current_scene_container = get_tree().get_first_node_in_group("current_area")
 		for child in current_scene_container.get_children():
 			child.queue_free()
 			await child.tree_exited

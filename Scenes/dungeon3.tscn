@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bddmie48n1ur1" path="res://Scenes/player_teal.tscn" id="2_87vr8"]
 [ext_resource type="PackedScene" uid="uid://dfd0nr26o1ko7" path="res://Scenes/demon.tscn" id="4_61qe5"]
 [ext_resource type="PackedScene" uid="uid://02qpes16wdr2" path="res://Scenes/hatch.tscn" id="4_h6v78"]
+[ext_resource type="PackedScene" uid="uid://bm4br7jacuwob" path="res://Scenes/player_blue.tscn" id="4_k11s8"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_07r10"]
 texture = ExtResource("1_wf6uj")
@@ -700,6 +701,9 @@ zoom = Vector2(4.04, 4.04)
 
 [node name="escape_hatch" parent="." instance=ExtResource("4_h6v78")]
 position = Vector2(571, -330)
+
+[node name="PlayerBlue" parent="." instance=ExtResource("4_k11s8")]
+position = Vector2(-128, 79)
 
 [node name="Demon" parent="." instance=ExtResource("4_61qe5")]
 position = Vector2(-322, -47)
