@@ -11,11 +11,17 @@ var is_attacking = false
 var enemy_in_attack_range = false
 var enemy_attack_cooldown = true
 var direction_facing = 0 #up=0,down=1,left=2,right=3
+var teal_attack_inprogress = false
 
 
-func _physics_process(delta):
-	
+func _physics_process(delta):	
 	enemy_attack()
+	
+	if GameState.teal_health <= 0:
+		GameState.teal_is_alive = false
+		GameState.teal_health = 0
+		print("Player Teal has been killed...")
+		#TODO add stuff to respawn
 	
 	if !is_attacking: # If attacking, do not change the animation
 		# Get the input direction and handle the movement/deceleration.
@@ -56,6 +62,8 @@ func _physics_process(delta):
 
 func play_attack_animation():
 	is_attacking = true
+	GameState.teal_current_attacking = true
+	teal_attack_inprogress = true
 	var attack_animation = ""
 	match direction_facing:
 		0: #facing up
@@ -78,20 +86,19 @@ func play_attack_animation():
 	# Animation finished, return to idle
 	is_attacking = false
 	
-func player():
+func teal_player():
 	pass
-
-func _on_sword_hit_area_entered(area: Area2D) -> void:
-	if area.is_in_group("hurtbox"):
-		area.take_damage()
 
 func player_blue_attack():
 	print("took damage from blue player")
 	GameState.player_teal_heal
 
 func enemy_attack():
-	if enemy_in_attack_range:
-		print("player took damage")
+	if enemy_in_attack_range and enemy_attack_cooldown:
+		GameState.teal_health -= 5
+		enemy_attack_cooldown = false
+		print(GameState.teal_health)
+		$attack_cooldown.start() 
 
 func _on_player_hit_body_entered(body: Node2D) -> void:
 	if body.has_method("enemy") or body.has_method("enemy-player"):
@@ -100,3 +107,6 @@ func _on_player_hit_body_entered(body: Node2D) -> void:
 func _on_player_hit_body_exited(body: Node2D) -> void:
 	if body.has_method("enemy") or body.has_method("enemy-player"):
 		enemy_in_attack_range = false
+
+func _on_attack_cooldown_timeout() -> void:
+	enemy_attack_cooldown = true

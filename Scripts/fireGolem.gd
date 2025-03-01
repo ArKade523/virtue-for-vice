@@ -54,4 +54,6 @@ func projectile():
 		
 		
 		get_parent().add_child(bullet)  # Add to the scene
-	
+
+func enemy():
+	pass
