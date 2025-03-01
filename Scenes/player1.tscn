@@ -126,7 +126,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack_down",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -252,4 +252,6 @@ offset_bottom = -176.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(47, -159)
 sprite_frames = SubResource("SpriteFrames_jthdb")
-animation = &"attack_down"
+animation = &"attack_up"
+frame = 1
+frame_progress = 0.371037
