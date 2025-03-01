@@ -1,6 +1,6 @@
 extends CharacterBody2D
 # player variables and constants
-const MOVEMENT_SPEED = 300.0
+const MOVEMENT_SPEED = 200.0
 @export var inventory:Inventory
 
 func _physics_process(delta):
@@ -13,8 +13,17 @@ func _physics_process(delta):
 	
 	
 	
+	
+	
 	#Update Movement Speed
 	velocity = input_direction * MOVEMENT_SPEED
+	
+	if (input_direction.x > 0):
+		$AnimatedSprite2D.play("walk_right")
+	elif  (input_direction.x < 0):
+		$AnimatedSprite2D.play("walk_left")
+	
+		
 	
 	#Move
 	move_and_slide()
