@@ -233,7 +233,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="player1" type="CharacterBody2D"]
+[node name="player_teal" type="CharacterBody2D"]
 collision_layer = 3
 motion_mode = 1
 script = ExtResource("1_xd3fx")
@@ -252,5 +252,6 @@ offset_bottom = -176.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(48, -160)
 sprite_frames = SubResource("SpriteFrames_jthdb")
-animation = &"attack_left"
-frame_progress = 0.213913
+animation = &"attack_up"
+autoplay = "walk_right"
+frame_progress = 0.42732

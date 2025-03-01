@@ -17,15 +17,20 @@ func _physics_process(delta):
 	
 	#Update Movement Speed
 	velocity = input_direction * MOVEMENT_SPEED
-	
-	if (input_direction.x > 0):
-		$AnimatedSprite2D.play("walk_right")
-	elif  (input_direction.x < 0):
-		$AnimatedSprite2D.play("walk_left")
-	
-		
-	
+	match input_direction:
+		Vector2(1,0): #moving to the right
+			print("made it here")
+			$AnimatedSprite2D.play("walk_right")
+		Vector2(-1,0): #moving to the left
+			$AnimatedSprite2D.play("walk_left")
+		Vector2(0,1): #moving down
+			$AnimatedSprite2D.play("walk_down")
+		Vector2(0,-1): #moving up
+			$AnimatedSprite2D.play("walk_up")
+		Vector2(0,0):
+			$AnimatedSprite2D.stop()
 	#Move
 	move_and_slide()
+	#$AnimatedSprite2D.stop()
 	
 	#TODO need to add actions for attack and possible roll? Do I do that here?
