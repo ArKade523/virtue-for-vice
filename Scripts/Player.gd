@@ -1,6 +1,6 @@
 extends CharacterBody2D
 # player variables and constants
-const MOVEMENT_SPEED = 200.0
+const MOVEMENT_SPEED = 100.0
 @export var inventory:Inventory
 
 func _physics_process(delta):
@@ -11,15 +11,15 @@ func _physics_process(delta):
 		Input.get_action_strength("down") - Input.get_action_strength("up")
 	)
 	
-	
+	#Attack Animations and logc
 	
 	
 	
 	#Update Movement Speed
-	velocity = input_direction * MOVEMENT_SPEED
+	velocity = input_direction.normalized() * MOVEMENT_SPEED
+	#Runs the walking animations
 	match input_direction:
 		Vector2(1,0): #moving to the right
-			print("made it here")
 			$AnimatedSprite2D.play("walk_right")
 		Vector2(-1,0): #moving to the left
 			$AnimatedSprite2D.play("walk_left")
