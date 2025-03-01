@@ -38,6 +38,20 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("attack"):
 		play_attack_animation()
 	
+	#Update Movement Speed
+	velocity = input_direction * MOVEMENT_SPEED
+	match input_direction:
+		Vector2(1,0): #moving to the right
+			$AnimatedSprite2D.play("walk_right")
+		Vector2(-1,0): #moving to the left
+			$AnimatedSprite2D.play("walk_left")
+		Vector2(0,1): #moving down
+			$AnimatedSprite2D.play("walk_down")
+		Vector2(0,-1): #moving up
+			$AnimatedSprite2D.play("walk_up")
+		Vector2(0,0):
+			$AnimatedSprite2D.stop()
+
 	#Move
 	move_and_slide()
 

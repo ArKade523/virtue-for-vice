@@ -3,17 +3,17 @@
 importer="texture"
 type="CompressedTexture2D"
 
-uid="uid://ct17a37ygxw8i"
+uid="uid://bds5dfqabp31q"
 
-path="res://.godot/imported/SkullSludge.png-c1eee31f3ecd6e19e0c6e08e0e3b7b1b.ctex"
+path="res://.godot/imported/LavaGolem.png-5c85ed6b1482d998780fae6a76607ae1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/SkullSludge.png"
-dest_files=["res://.godot/imported/SkullSludge.png-c1eee31f3ecd6e19e0c6e08e0e3b7b1b.ctex"]
+source_file="res://Assets/LavaGolem.png"
+dest_files=["res://.godot/imported/LavaGolem.png-5c85ed6b1482d998780fae6a76607ae1.ctex"]
 
 [params]
 
