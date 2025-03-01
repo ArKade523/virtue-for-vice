@@ -1,0 +1,76 @@
+[gd_scene load_steps=5 format=3 uid="uid://c00g72lju3d1"]
+
+[ext_resource type="Script" path="res://Scripts/instructions.gd" id="1_mn2o4"]
+
+[sub_resource type="SystemFont" id="SystemFont_aelwd"]
+font_names = PackedStringArray("Monospace")
+
+[sub_resource type="LabelSettings" id="LabelSettings_dl2c2"]
+font = SubResource("SystemFont_aelwd")
+font_size = 15
+
+[sub_resource type="LabelSettings" id="LabelSettings_w1w8i"]
+font_size = 14
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_mn2o4")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(584, 344)
+zoom = Vector2(2.47, 2.47)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+top_level = true
+light_mask = 2
+visibility_layer = 2
+z_index = -4
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.507
+anchor_top = 0.531
+anchor_right = 0.507
+anchor_bottom = 0.531
+offset_left = -1656.06
+offset_top = -1192.09
+offset_right = 2843.94
+offset_bottom = 1807.91
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.215036, 0.000728349, 1.8049e-08, 1)
+
+[node name="Label" type="Label" parent="."]
+visibility_layer = 3
+z_index = 10
+offset_left = 357.0
+offset_top = 221.0
+offset_right = 814.0
+offset_bottom = 268.0
+text = "Virtue for Vice"
+label_settings = SubResource("LabelSettings_dl2c2")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 354.0
+offset_top = 432.0
+offset_right = 598.0
+offset_bottom = 475.0
+text = "Player1: Arrow keys, Space to attack
+Player2: Joystick, x to attack"
+label_settings = SubResource("LabelSettings_w1w8i")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
