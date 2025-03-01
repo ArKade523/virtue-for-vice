@@ -11,9 +11,17 @@ config_version=5
 [application]
 
 config/name="virtue-for-vice"
-run/main_scene="res://Scenes/dungeon1.tscn"
+run/main_scene="res://Scenes/dungeon2.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+GameState="*res://Scripts/GameState.gd"
+
+[global_group]
+
+enemies=""
 
 [input]
 
