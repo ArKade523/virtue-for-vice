@@ -8,23 +8,39 @@ extends Camera2D
 @export var padding: float = 200.0  # Extra space around players
 
 func _process(delta):
-	if not (player_1 and player_2):
-		return  # If players are missing, do nothing
+	# **Ensure players exist before proceeding**
+	var p1 = player_1 if is_instance_valid(player_1) else null
+	var p2 = player_2 if is_instance_valid(player_2) else null
+	
+	#if !GameState.blue_is_alive and !GameState.teal_is_alive:
+		#GameState.current_scene -= 1
+		#GameState.load_next_level()
 
-	# Calculate the midpoint between the two players
-	var midpoint = (player_1.global_position + player_2.global_position) * 0.5
-	position = position.lerp(midpoint + Vector2(0, -100), delta)   # Smoothly move to midpoint
+	# **Calculate midpoint** (Default to previous position if both players are gone)
+	var midpoint: Vector2 = position
 
-	# Calculate distance between players
-	var distance = player_1.global_position.distance_to(player_2.global_position)
+	if p1 and p2:
+		midpoint = (p1.global_position + p2.global_position) * 0.5
+	elif p1:
+		midpoint = p1.global_position
+	elif p2:
+		midpoint = p2.global_position
+	
+	# **Smoothly move the camera to the midpoint** (+ slight vertical offset)
+	position = position.lerp(midpoint + Vector2(0, -100), delta)
 
-	# Determine new zoom level based on player distance
+	# **Calculate distance only if both players exist**
+	var distance = 200  # Default zoom distance if one player is missing
+	if p1 and p2:
+		distance = p1.global_position.distance_to(p2.global_position)
+
+	# **Determine new zoom level based on player distance**
 	var screen_size = get_viewport_rect().size
 	var desired_zoom = max(
-		distance / (screen_size.x - padding),  # Scale to fit width
-		distance / (screen_size.y - padding)   # Scale to fit height
+		distance / (screen_size.x - padding),
+		distance / (screen_size.y - padding)
 	)
 
-	# Clamp zoom between min and max values
+	# **Clamp and smoothly adjust zoom**
 	var clamped_zoom = clamp(desired_zoom, min_zoom, max_zoom)
-	zoom = lerp(zoom, Vector2(clamped_zoom, clamped_zoom), delta * zoom_speed)
+	zoom = zoom.lerp(Vector2(clamped_zoom, clamped_zoom), delta * zoom_speed)

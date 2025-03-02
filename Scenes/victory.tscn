@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c4kvy448cerff"]
+[gd_scene load_steps=4 format=3 uid="uid://bdpsg4a253uhn"]
 
 [ext_resource type="Script" path="res://Scripts/victory.gd" id="1_o16my"]
 
@@ -58,12 +58,13 @@ horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.05
 autostart = true
 
 [node name="Label2" type="Label" parent="."]
 visibility_layer = 3
 z_index = 10
+layout_mode = 0
 offset_left = 609.0
 offset_top = 242.0
 offset_right = 783.0

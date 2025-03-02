@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://br6knds1mr6pl" path="res://Assets/tilesets/Dungeon_Tileset.png" id="1_wf6uj"]
 [ext_resource type="PackedScene" uid="uid://bddmie48n1ur1" path="res://Scenes/player_teal.tscn" id="2_87vr8"]
-[ext_resource type="PackedScene" path="res://Scenes/demon.tscn" id="4_61qe5"]
+[ext_resource type="PackedScene" uid="uid://dfd0nr26o1ko7" path="res://Scenes/demon.tscn" id="4_61qe5"]
 [ext_resource type="PackedScene" uid="uid://02qpes16wdr2" path="res://Scenes/hatch.tscn" id="4_h6v78"]
 [ext_resource type="PackedScene" path="res://Scenes/player_blue.tscn" id="4_k11s8"]
 [ext_resource type="Script" path="res://Scripts/dynamicCamera.gd" id="6_trb7h"]
@@ -697,7 +697,7 @@ position = Vector2(-165, 79)
 motion_mode = 0
 
 [node name="escape_hatch" parent="." instance=ExtResource("4_h6v78")]
-position = Vector2(571, -330)
+position = Vector2(-361, 29)
 
 [node name="PlayerBlue" parent="." instance=ExtResource("4_k11s8")]
 position = Vector2(-128, 79)

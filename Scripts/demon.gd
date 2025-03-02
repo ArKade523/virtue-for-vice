@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 #creature stats
 const MOVEMENT_SPEED = 100
-var health = 20
+var health = 1700
 
 @onready var timer = $Timer
 @onready var locator = $locator
@@ -18,6 +18,8 @@ var blue_in_attack_zone = false
 var x_mov = 0
 var y_mov = 0
 
+func _process(_delta):
+		deal_with_damage()
 
 func _on_timer_timeout():
 	projectile()

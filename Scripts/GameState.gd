@@ -16,7 +16,7 @@ var teal_current_attacking = false
 
 ##Player BLUE
 #player blue stats
-var blue_health = MAX_HEALTH
+var blue_health = MAX_HEALTH * 5
 var blue_damage = BASE_DAMAGE
 var blue_is_alive = true
 var blue_attributes = ["handsome","dashing","considerate","good-personality","short-nose-hairs", "trimmed-toenails"]
@@ -35,7 +35,6 @@ var next_dungeon_map = [
 	"res://Scenes/level2end.tscn",
 	"res://Scenes/dungeon3.tscn",
 	"res://Scenes/victory.tscn",
-	"res://Scenes/dungeon1.tscn",
 ]
 
 var current_scene_container: Node2D
@@ -54,7 +53,7 @@ func _process(_delta: float) -> void:
 	var blue_health_bar = get_tree().get_first_node_in_group("blue_health")
 	if (teal_health_bar and blue_health_bar):
 		teal_health_bar.value = float(teal_health / MAX_HEALTH) * 100
-		blue_health_bar.value = float(blue_health / MAX_HEALTH) * 100
+		blue_health_bar.value = float(blue_health / (MAX_HEALTH * 5)) * 100
 
 func load_next_level():
 	if next_dungeon_map[current_scene]:
@@ -70,7 +69,7 @@ func load_next_level():
 		var instance = next_scene.instantiate()
 		current_scene_container.add_child(instance)
 		current_scene += 1
-		if current_scene > 0:
+		if current_scene > 1 :
 			var teal_health_bar = get_tree().get_first_node_in_group("teal_health")
 			var blue_health_bar = get_tree().get_first_node_in_group("blue_health")
 			teal_health_bar.visible = true

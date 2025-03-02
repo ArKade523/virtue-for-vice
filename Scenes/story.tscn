@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://c00g72lju3d1"]
+[gd_scene load_steps=5 format=3 uid="uid://v14h3wtox4pg"]
 
 [ext_resource type="Script" path="res://Scripts/instructions.gd" id="1_mn2o4"]
 
@@ -50,6 +50,7 @@ color = Color(0.215036, 0.000728349, 1.8049e-08, 1)
 [node name="Label" type="Label" parent="."]
 visibility_layer = 3
 z_index = 10
+layout_mode = 0
 offset_left = 357.0
 offset_top = 221.0
 offset_right = 814.0
@@ -60,7 +61,7 @@ horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.07
 autostart = true
 
 [node name="Label2" type="Label" parent="."]

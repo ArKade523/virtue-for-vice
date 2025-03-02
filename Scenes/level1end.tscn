@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7g0sjsnp0y0q"]
+[gd_scene load_steps=4 format=3 uid="uid://d2ujykg2jwwoo"]
 
 [ext_resource type="Script" path="res://Scripts/level1end.gd" id="1_fuiqw"]
 
@@ -58,7 +58,7 @@ horizontal_alignment = 1
 autowrap_mode = 3
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.05
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

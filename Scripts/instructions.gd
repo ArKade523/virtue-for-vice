@@ -1,7 +1,7 @@
 extends Control
 
 @onready var label = $Label
-var story = "One fateful day, twin brothers were practicing Latin when they accidentally summoned a demon. This demon whisked away their beloved to a horrible dungeon. Before he left, he told them that they had the chance to fight for their beloved. However this dungeon had many perils and each death exchanged a virtue for a vice. Will the twins retain their humanity and save the princess?  "
+var story = "One fateful day, twin brothers were practicing Latin when they accidentally summoned a demon. This demon whisked away their beloved to a horrible dungeon. Before he left, he told them that they had the chance to fight for their beloved. However this dungeon had many perils and each death exchanged a virtue for a vice. Will the twins retain their humanity and save the princess?  \n\n\n\n\n\n\n                         "
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	label.text = ""
