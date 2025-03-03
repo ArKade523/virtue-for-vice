@@ -1,75 +1,109 @@
 extends CharacterBody2D
 
-const MOVEMENT_SPEED = 150
+# Creature stats
+const MOVEMENT_SPEED = 100
 const DAMAGE = 5
 var health = 20
-#players
-var teal_in_attack_zone = false
-var blue_in_attack_zone = false
-
 
 @onready var timer = $Timer
-@onready var view = $ShapeCast2D
-@onready var animation = $AnimatedSprite2D
-@onready var cooldown = $cooldown
+@onready var hurtbox = $hurtbox
+@onready var locator = $locator
+@onready var range = $range
 
+var move_animations: Array = [
+	"walk_up", 
+	"walk_down", 
+	"walk_left", 
+	"walk_right"
+]
+const UP = 0
+const DOWN = 1
+const LEFT = 2
+const RIGHT = 3
+var direction_facing = DOWN
 
-var x_mov = 0
-var y_mov = 0
+var wander_timer = 0.0  # Timer to control wandering
+var wander_direction = Vector2.ZERO  # Current movement direction
+
+var detected_players: Array = []  # Stores players detected in range
+var attackable_players: Array = []  # Stores players detected in range
 
 func _process(delta):
-	deal_with_damage()
-	
-	velocity.x = x_mov
-	velocity.y = y_mov
-	if abs(velocity.x) > abs(velocity.y):
-		if velocity.x > 0:
-			animation.play("right_walk")
-		else:
-			animation.play("left_walk")
+	var direction: Vector2 = Vector2.ZERO
+	if detected_players.is_empty():
+		direction = wander(delta)
 	else:
-		if velocity.y > 0:
-			animation.play("down_walk")
-		else:
-			animation.play("up_walk")
-	var result: Array = view.collision_result
-	if not result.is_empty():
-		update_direction(Vector2(result[0].point.x - position.x ,result[0].point.y - position.y))	
+		var player_pos = detected_players[0].global_position  # Chase the first player
+		direction = player_pos - position
+		update_direction(direction)
+	
+	update_animations(direction)
 	move_and_slide()
 	
-func enemy():
-	pass
+func update_animations(direction: Vector2):
+	if direction != Vector2.ZERO:
+		if abs(direction.x) > abs(direction.y):  # Horizontal movement dominates
+			if direction.x > 0:
+				direction_facing = RIGHT
+			else:
+				direction_facing = LEFT
+		else:  # Vertical movement dominates
+			if direction.y > 0:
+				direction_facing = DOWN
+			else:
+				direction_facing = UP
+		$AnimatedSprite2D.play(move_animations[direction_facing])
+	else:
+		$AnimatedSprite2D.play("walk_down") # TODO: Add idle anim
 
+func wander(delta):
+	wander_timer -= delta  # Decrease timer
+
+	if wander_timer <= 0:  # Time to pick a new direction
+		wander_timer = randf_range(1.5, 3.5)  # Random interval for movement
+		wander_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
+	
+	velocity = wander_direction * MOVEMENT_SPEED * 0.5  # Move at 50% speed
+	return wander_direction
+
+func update_direction(direction: Vector2):
+	var distance = direction.length()
+	var angle = direction.normalized()
+
+	velocity = angle * MOVEMENT_SPEED
 
 func _on_timer_timeout():
-	if not view.is_colliding():	
-		update_direction(Vector2(randi_range(-100, 100), randi_range(-100, 100)))
+	attack()
 
-func update_direction(direction):
-	var angle = direction.normalized()
-	x_mov = angle.x * MOVEMENT_SPEED
-	y_mov = angle.y * MOVEMENT_SPEED
-	view.target_position.x = angle.x * 150
-	view.target_position.y = angle.y * 150
+func attack():
+	if detected_players.is_empty():
+		return  # No target
+	
+	var target = attackable_players[0]  # Target the first player detected
+	target.take_damage(DAMAGE)
 
+func take_damage(damage: int):
+	health -= damage
+	# TODO: Add damage animation
+	if health <= 0:
+		die()
 
-#func _on_area_2d_body_entered(body: Node2D) -> void:
-	#print("BIG OOF")
-	#print(body.name)
-	##body.health -= DAMAGE
+func die():
+	# TODO: Add animation
+	queue_free()
 
-func _on_enemy_hit_box_body_entered(body: Node2D) -> void:
-	if body.has_method("teal_player"):
-		teal_in_attack_zone = true
+func _on_hurtbox_body_entered(body: Node2D):
+	if body.is_in_group("players"):  # Ensure the body is a player
+		attackable_players.append(body)
 
+func _on_hurtbxx_body_exited(body: Node2D):
+	if body.is_in_group("players"):
+		attackable_players.erase(body)  # Remove the player from tracking list
 
-func _on_enemy_hit_box_body_exited(body: Node2D) -> void:
-	if body.has_method("teal_player"):
-		teal_in_attack_zone = false
-		
-func deal_with_damage():
-	if (teal_in_attack_zone and GameState.teal_current_attacking) or (blue_in_attack_zone and GameState.blue_current_attacking):
-		health -= GameState.BASE_DAMAGE
-		print("goblin health =", health)
-		if health <= 0:
-			self.queue_free()
+func _on_locator_body_entered(body: Node2D):
+	if body.is_in_group("players"):  # Ensure the body is a player
+		detected_players.append(body)
+
+func _on_locator_body_exited(body: Node2D):
+	if body.is_in_group("players"):
+		detected_players.erase(body)  # Remove the player from tracking list

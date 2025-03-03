@@ -1,9 +1,6 @@
 extends Area2D
-#players
-var teal_in_attack_zone = false
-var blue_in_attack_zone = false
-const SPEED = 300  # Adjust as needed
-var direction = Vector2.ZERO  # This will be set when fired
+const SPEED = 300 
+var direction = Vector2.ZERO 
 
 func _process(delta: float) -> void:
 	position += direction * SPEED * delta

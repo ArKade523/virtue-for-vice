@@ -4,8 +4,11 @@ extends Area2D
 @onready var animation_player: AnimationPlayer = $CanvasLayer/AnimationPlayer
 @onready var black_overlay: ColorRect = $CanvasLayer/BlackOverlay
 
+var game_area: Node2D
+
 func _ready():
 	body_entered.connect(_on_body_entered)
+	game_area = get_tree().get_first_node_in_group("game_area")
 	
 func _process(delta: float) -> void:
 	if _all_enemies_defeated():
@@ -26,7 +29,8 @@ func _fade_to_black(body):
 	animation_player.play("fadeOut")
 
 	await animation_player.animation_finished
-	GameState.load_next_level()
+	if game_area:
+		game_area.load_next_level()
 
 func change_tile(tileset_texture: Texture2D, new_region: Rect2):
 	var atlas_texture = AtlasTexture.new()

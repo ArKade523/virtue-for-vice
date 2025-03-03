@@ -49,6 +49,7 @@ func toggleHudVisibility(on: bool):
 	var blue_health_bar = get_tree().get_first_node_in_group("blue_health")
 	pt.visible = on
 	pb.visible = on
+	$TrackingCamera.enabled = on
 	if teal_health_bar:
 		teal_health_bar.visible = on
 	if blue_health_bar:

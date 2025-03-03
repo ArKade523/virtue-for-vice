@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://q807jo2extut"]
+[gd_scene load_steps=6 format=3 uid="uid://q807jo2extut"]
 
 [ext_resource type="Script" path="res://Scripts/game_area.gd" id="1_a2q44"]
 [ext_resource type="PackedScene" uid="uid://dy5oujp4cp4pv" path="res://Scenes/hud.tscn" id="1_mrwjm"]
 [ext_resource type="PackedScene" uid="uid://gewynagbgg6s" path="res://Scenes/player_blue.tscn" id="2_e7ga6"]
 [ext_resource type="PackedScene" uid="uid://bddmie48n1ur1" path="res://Scenes/player_teal.tscn" id="3_os600"]
+[ext_resource type="Script" path="res://Scripts/dynamicCamera.gd" id="5_kw8hj"]
 
 [node name="GameArea" type="Node2D" groups=["game_area"]]
 script = ExtResource("1_a2q44")
@@ -22,3 +23,9 @@ offset_bottom = 6.54919
 
 [node name="PlayerTeal" parent="." instance=ExtResource("3_os600")]
 position = Vector2(0, -1)
+
+[node name="TrackingCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player_1", "player_2")]
+position_smoothing_enabled = true
+script = ExtResource("5_kw8hj")
+player_1 = NodePath("../PlayerBlue")
+player_2 = NodePath("../PlayerTeal")

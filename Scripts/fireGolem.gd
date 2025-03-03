@@ -10,11 +10,6 @@ var health = 140
 @onready var range = $range
 @onready var fireBolt = preload("res://Scenes/fireBolt.tscn")
 
-# Players
-var teal_in_attack_zone = false
-var blue_in_attack_zone = false
-
-
 var move_animations: Array = [
 	"walk_up", 
 	"walk_down", 
@@ -30,8 +25,6 @@ var direction_facing = DOWN
 var wander_timer = 0.0  # Timer to control wandering
 var wander_direction = Vector2.ZERO  # Current movement direction
 
-func _ready():
-	damage_timer.timeout.connect(_apply_damage)  # Connect timeout signal
 var detected_players: Array = []  # Stores players detected in range
 
 func _process(delta):
@@ -103,21 +96,7 @@ func take_damage(damage: int):
 	# TODO: Add damage animation
 	if health <= 0:
 		die()
-	
-func _apply_damage():
-	# Only apply damage if the player is attacking
-	if (teal_in_attack_zone and GameState.teal_current_attacking) or (blue_in_attack_zone and GameState.blue_current_attacking):
-		health -= GameState.BASE_DAMAGE
-		print("Golem health =", health)
 
-		# If the golem dies, stop processing damage
-		if health <= 0:
-			die()
-			return
-
-		# Restart the timer **only after dealing damage**
-		damage_timer.start()
-		
 func die():
 	# TODO: Add animation
 	queue_free()
@@ -129,25 +108,3 @@ func _on_locator_body_entered(body: Node2D):
 func _on_locator_body_exited(body: Node2D):
 	if body.is_in_group("players"):
 		detected_players.erase(body)  # Remove the player from tracking list
-
-# Start the damage timer **only when entering the attack zone**
-func _on_enemy_hit_box_body_entered(body: Node2D) -> void:
-	if body.has_method("teal_player"):
-		teal_in_attack_zone = true
-	elif body.has_method("blue_player"):
-		blue_in_attack_zone = true
-
-	# If the timer is not already running, start it
-	if damage_timer.is_stopped():
-		damage_timer.start()
-
-# Stop the timer **only when both players leave**
-func _on_enemy_hit_box_body_exited(body: Node2D) -> void:
-	if body.has_method("teal_player"):
-		teal_in_attack_zone = false
-	elif body.has_method("blue_player"):
-		blue_in_attack_zone = false
-
-	# Stop the timer if no players remain in the attack zone
-	if not teal_in_attack_zone and not blue_in_attack_zone:
-		damage_timer.stop()
