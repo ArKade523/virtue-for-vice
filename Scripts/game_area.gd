@@ -5,10 +5,10 @@ extends Node2D
 @onready var current_scene_container: Node2D = $CurrentScene
 
 var next_dungeon_map = [
-	#{"scene": "res://Scenes/start_screen.tscn", "visibleHud": false }, 
-	#{"scene": "res://Scenes/story.tscn", "visibleHud": false }, 
-	#{"scene": "res://Scenes/dungeon1.tscn", "visibleHud": true }, 
-	#{"scene": "res://Scenes/level1end.tscn", "visibleHud": false }, 
+	{"scene": "res://Scenes/start_screen.tscn", "visibleHud": false }, 
+	{"scene": "res://Scenes/story.tscn", "visibleHud": false }, 
+	{"scene": "res://Scenes/dungeon1.tscn", "visibleHud": true }, 
+	{"scene": "res://Scenes/level1end.tscn", "visibleHud": false }, 
 	{"scene": "res://Scenes/dungeon2.tscn", "visibleHud": true }, 
 	{"scene": "res://Scenes/level2end.tscn", "visibleHud": false }, 
 	{"scene": "res://Scenes/dungeon3.tscn", "visibleHud": true }, 
@@ -22,8 +22,8 @@ func _process(_delta: float) -> void:
 	var teal_health_bar = get_tree().get_first_node_in_group("teal_health")
 	var blue_health_bar = get_tree().get_first_node_in_group("blue_health")
 	if (teal_health_bar and blue_health_bar):
-		teal_health_bar.value = float(GameState.teal_health / GameState.MAX_HEALTH) * 100
-		blue_health_bar.value = float(GameState.blue_health / GameState.MAX_HEALTH) * 100
+		teal_health_bar.value = float(pt.health / GameState.MAX_HEALTH) * 100
+		blue_health_bar.value = float(pb.health / GameState.MAX_HEALTH) * 100
 
 var current_scene_idx: int = 0
 
@@ -43,6 +43,8 @@ func load_next_level():
 		current_scene_idx += 1
 		toggleHudVisibility(next_dungeon["visibleHud"])
 		movePlayersToStart()
+		pb.revive()
+		pt.revive()
 			
 func toggleHudVisibility(on: bool):
 	var teal_health_bar = get_tree().get_first_node_in_group("teal_health")

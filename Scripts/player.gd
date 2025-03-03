@@ -30,53 +30,46 @@ const RIGHT = 3
 # Player states
 const MOVEMENT_SPEED = GameState.MOVEMENT_SPEED
 var is_attacking = false
-var enemy_in_attack_range = false
-var enemy_attack_cooldown = true
 var direction_facing = UP  # up=0, down=1, left=2, right=3
 var damage = 5  # Base damage value
+var health: float = GameState.MAX_HEALTH
+var alive: bool = true
 
 func _ready():
 	sword_hitbox.monitoring = false  # Disable hitbox on start
 	sword_hitbox.body_entered.connect(_on_sword_hitbox_body_entered)
 
-func _physics_process(delta):	
-	# Process enemy attack logic
-	if enemy_in_attack_range and enemy_attack_cooldown:
-		enemy_attack()
+func _physics_process(delta):
+	if alive:
+		if Input.is_action_just_pressed(attack_input):
+			attack()
 
-	if Input.is_action_just_pressed(attack_input):
-		attack()
+		# Player movement
+		if not is_attacking:  # If attacking, do not change movement
+			var input_direction = Vector2(
+				Input.get_action_strength(right_input) - Input.get_action_strength(left_input),
+				Input.get_action_strength(down_input) - Input.get_action_strength(up_input)
+			)
 
-	# If player dies, reset their health and remove them from the scene
-	if GameState.blue_health <= 0:
-		die()
+			# Update Movement Speed
+			velocity = input_direction.normalized() * MOVEMENT_SPEED
 
-	# Player movement
-	if not is_attacking:  # If attacking, do not change movement
-		var input_direction = Vector2(
-			Input.get_action_strength(right_input) - Input.get_action_strength(left_input),
-			Input.get_action_strength(down_input) - Input.get_action_strength(up_input)
-		)
+			# Play walking animations
+			if input_direction != Vector2.ZERO:
+				if input_direction.y < 0:  # Moving up
+					direction_facing = UP
+				elif input_direction.y > 0:  # Moving down
+					direction_facing = DOWN
+				elif input_direction.x < 0:  # Moving left
+					direction_facing = LEFT
+				elif input_direction.x > 0:  # Moving right
+					direction_facing = RIGHT
+				$AnimatedSprite2D.play(move_animations[direction_facing])
+			else:
+				$AnimatedSprite2D.stop()  # Stop animation when not moving
 
-		# Update Movement Speed
-		velocity = input_direction.normalized() * MOVEMENT_SPEED
-
-		# Play walking animations
-		if input_direction != Vector2.ZERO:
-			if input_direction.y < 0:  # Moving up
-				direction_facing = UP
-			elif input_direction.y > 0:  # Moving down
-				direction_facing = DOWN
-			elif input_direction.x < 0:  # Moving left
-				direction_facing = LEFT
-			elif input_direction.x > 0:  # Moving right
-				direction_facing = RIGHT
-			$AnimatedSprite2D.play(move_animations[direction_facing])
-		else:
-			$AnimatedSprite2D.stop()  # Stop animation when not moving
-
-	# Move the player
-	move_and_slide()
+		# Move the player
+		move_and_slide()
 
 func play_attack_animation():
 	var attack_animation = ""
@@ -95,46 +88,19 @@ func attack():
 	sword_hitbox.monitoring = true
 	enable_correct_hitbox()
 	is_attacking = true
-	# TODO: move health into the player
-	match pcolor:
-		"blue": GameState.blue_current_attacking = true
-		"teal": GameState.teal_current_attacking = true
-	
+
 	await play_attack_animation()
-	# TODO: move health into the player
-	match pcolor:
-		"blue": GameState.blue_current_attacking = false
-		"teal": GameState.teal_current_attacking = false
+
 	sword_hitbox.monitoring = false
 	disable_all_hitboxes()
 	is_attacking = false
-	
-
-func enemy_attack():
-	if enemy_attack_cooldown:
-		# TODO: move health into the players
-		# Apply enemy attack
-		match pcolor:
-			"blue": GameState.blue_health -= damage
-			"teal": GameState.teal_health -= damage  
-		enemy_attack_cooldown = false
-		$attack_cooldown.start()  # Start cooldown timer
 
 func take_damage(damage: int):
 	# TODO: Add damage animation
-	match pcolor:
-		"blue": 
-			GameState.blue_health -= damage
-			if GameState.blue_health <= 0:
-				die()
-		"teal": 
-			GameState.teal_health -= damage  
-			if GameState.teal_health <= 0:
-				die()
+	health -= damage
+	if health <= 0:
+		die()
 
-func _on_attack_cooldown_timeout() -> void:
-	enemy_attack_cooldown = true  # Reset cooldown for next attack
-	
 func _on_sword_hitbox_body_entered(body):
 	if body.is_in_group("enemies") or (body.is_in_group("players") and body != self):
 		body.take_damage(10)  # Call enemy damage function
@@ -154,14 +120,13 @@ func disable_all_hitboxes():
 	hitbox_right.disabled = true
 	
 func die():
-	# TODO: move states into player
-	match pcolor:
-		"blue": 
-			GameState.blue_is_alive = false
-			GameState.blue_health = GameState.MAX_HEALTH
-		"teal": 
-			GameState.teal_is_alive = false
-			GameState.teal_health = GameState.MAX_HEALTH
-	
 	print("The " + pcolor + " player was killed...")
-	queue_free()
+	# TODO: make the player actually disabled fully
+	# TODO: Add death animation
+	alive = false
+	visible = false
+
+func revive():
+	# TODO: Add revive animation maybe
+	alive = true
+	health = GameState.MAX_HEALTH

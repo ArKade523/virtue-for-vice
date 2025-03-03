@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 # Creature stats
 const MOVEMENT_SPEED = 100
-const DAMAGE = 5
+const DAMAGE = 2
 var health = 20
 
 @onready var timer = $Timer

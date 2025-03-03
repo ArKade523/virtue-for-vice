@@ -275,8 +275,6 @@ position = Vector2(0, 1)
 [node name="player_hit_box" type="CollisionPolygon2D" parent="player_hit"]
 polygon = PackedVector2Array(5, -7, 5, 12, -5, 12, -5, -2, -3, -12, 2, -12)
 
-[node name="attack_cooldown" type="Timer" parent="."]
-
 [node name="sword_hitbox" type="Area2D" parent="."]
 
 [node name="hitbox_up" type="CollisionPolygon2D" parent="sword_hitbox"]
@@ -296,4 +294,3 @@ polygon = PackedVector2Array(-9, 4, -9, -11, -12, -20, -5, -24, 4, -22, 2, -5)
 
 [connection signal="body_entered" from="player_hit" to="." method="_on_player_hit_body_entered"]
 [connection signal="body_exited" from="player_hit" to="." method="_on_player_hit_body_exited"]
-[connection signal="timeout" from="attack_cooldown" to="." method="_on_attack_cooldown_timeout"]

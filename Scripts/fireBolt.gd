@@ -11,4 +11,4 @@ func initialize_fireBolt(dir: Vector2) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("players"):
 		body.take_damage(GameState.FIREBOLT_DAMAGE)
-	self.queue_free()
+	queue_free()

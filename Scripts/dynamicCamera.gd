@@ -19,11 +19,11 @@ func _process(delta):
 	# **Calculate midpoint** (Default to previous position if both players are gone)
 	var midpoint: Vector2 = position
 
-	if p1 and p2:
+	if (p1 and p2) and (p1.alive and p2.alive):
 		midpoint = (p1.global_position + p2.global_position) * 0.5
-	elif p1:
+	elif p1 and p1.alive:
 		midpoint = p1.global_position
-	elif p2:
+	elif p2 and p2.alive:
 		midpoint = p2.global_position
 	
 	# **Smoothly move the camera to the midpoint** (+ slight vertical offset)

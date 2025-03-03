@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 #creature stats
 const MOVEMENT_SPEED = 100
-var health = 1700
+var health = 200
 
 @onready var timer = $Timer
 @onready var locator = $locator
@@ -54,6 +54,16 @@ func deal_with_damage():
 		print("Golem health =", health)
 		if health <= 0:
 			self.queue_free()
+
+func take_damage(damage: int):
+	health -= damage
+	# TODO: Add damage animation
+	if health <= 0:
+		die()
+
+func die():
+	# TODO: Add animation
+	queue_free()
 
 
 func _on_enemy_hit_box_body_entered(body: Node2D) -> void:
