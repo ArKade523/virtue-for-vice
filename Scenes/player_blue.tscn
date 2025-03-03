@@ -1,7 +1,10 @@
 [gd_scene load_steps=32 format=3 uid="uid://gewynagbgg6s"]
 
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_iew2e"]
 [ext_resource type="Texture2D" uid="uid://dkb3ujbx4nta3" path="res://Assets/ActualDarkBluePrince.png" id="2_g635u"]
-[ext_resource type="Script" path="res://Scripts/blue_player.gd" id="4_fsnd5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xife7"]
+size = Vector2(9, 12.625)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4e85b"]
 atlas = ExtResource("2_g635u")
@@ -245,25 +248,28 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xife7"]
-size = Vector2(9, 12.625)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jey56"]
 size = Vector2(18, 31.5)
 
-[node name="PlayerBlue" type="CharacterBody2D"]
+[node name="player_blue" type="CharacterBody2D" groups=["players"]]
 z_index = 5
 collision_layer = 3
-script = ExtResource("4_fsnd5")
+script = ExtResource("1_iew2e")
+pcolor = "blue"
+attack_input = "blue_attack"
+up_input = "blue_up"
+down_input = "blue_down"
+left_input = "blue_left"
+right_input = "blue_right"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 7.312)
+shape = SubResource("RectangleShape2D_xife7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_sgjf6")
 animation = &"attack_left"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 7.312)
-shape = SubResource("RectangleShape2D_xife7")
 
 [node name="player_hit" type="Area2D" parent="."]
 position = Vector2(0, 1)

@@ -132,7 +132,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_hphmy")
 }],
 "loop": true,
-"name": &"Attack Down",
+"name": &"attack_down",
 "speed": 5.0
 }, {
 "frames": [{
@@ -152,7 +152,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_p6g12")
 }],
 "loop": true,
-"name": &"Attack Left",
+"name": &"attack_left",
 "speed": 5.0
 }, {
 "frames": [{
@@ -175,7 +175,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_kwmas")
 }],
 "loop": true,
-"name": &"Attack Right",
+"name": &"attack_right",
 "speed": 5.0
 }, {
 "frames": [{
@@ -201,7 +201,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_bbbfq")
 }],
 "loop": true,
-"name": &"Attack Up",
+"name": &"attack_up",
 "speed": 5.0
 }, {
 "frames": [{
@@ -218,7 +218,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_260wo")
 }],
 "loop": true,
-"name": &"Walk Down",
+"name": &"walk_down",
 "speed": 2.0
 }, {
 "frames": [{
@@ -229,7 +229,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_xqkn8")
 }],
 "loop": true,
-"name": &"Walk Left",
+"name": &"walk_left",
 "speed": 2.0
 }, {
 "frames": [{
@@ -240,7 +240,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_v54tg")
 }],
 "loop": true,
-"name": &"Walk Right",
+"name": &"walk_right",
 "speed": 2.0
 }, {
 "frames": [{
@@ -257,38 +257,41 @@ animations = [{
 "texture": SubResource("AtlasTexture_3i6i7")
 }],
 "loop": true,
-"name": &"Walk Up",
+"name": &"walk_up",
 "speed": 2.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3ivrk"]
 radius = 9.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ok75h"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_se368"]
+radius = 81.0062
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_0nfg5"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_ok75h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qc45a"]
 radius = 17.0
 
 [node name="FireGolem" type="CharacterBody2D"]
+z_index = 1
 script = ExtResource("1_b8hbb")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_mavh5")
-animation = &"Walk Left"
-frame_progress = 0.120168
+animation = &"walk_left"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
 shape = SubResource("CircleShape2D_3ivrk")
 
+[node name="locator" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="locator"]
+shape = SubResource("CircleShape2D_se368")
+
 [node name="range" type="ShapeCast2D" parent="."]
 shape = SubResource("CircleShape2D_ok75h")
 collision_mask = 2
-
-[node name="locator" type="ShapeCast2D" parent="."]
-shape = SubResource("CircleShape2D_0nfg5")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0
@@ -305,6 +308,8 @@ collision_layer = 3
 position = Vector2(0, 3)
 shape = SubResource("CircleShape2D_qc45a")
 
+[connection signal="body_entered" from="locator" to="." method="_on_locator_body_entered"]
+[connection signal="body_exited" from="locator" to="." method="_on_locator_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="enemy_hit_box" to="." method="_on_enemy_hit_box_body_entered"]
 [connection signal="body_exited" from="enemy_hit_box" to="." method="_on_enemy_hit_box_body_exited"]

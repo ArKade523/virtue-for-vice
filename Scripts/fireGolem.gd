@@ -15,22 +15,52 @@ var teal_in_attack_zone = false
 var blue_in_attack_zone = false
 
 
+var move_animations: Array = [
+	"walk_up", 
+	"walk_down", 
+	"walk_left", 
+	"walk_right"
+]
+const UP = 0
+const DOWN = 1
+const LEFT = 2
+const RIGHT = 3
+var direction_facing = DOWN
+
 var wander_timer = 0.0  # Timer to control wandering
 var wander_direction = Vector2.ZERO  # Current movement direction
 
 func _ready():
 	damage_timer.timeout.connect(_apply_damage)  # Connect timeout signal
-
 var detected_players: Array = []  # Stores players detected in range
 
 func _process(delta):
+	var direction: Vector2 = Vector2.ZERO
 	if detected_players.is_empty():
-		wander(delta)
+		direction = wander(delta)
 	else:
 		var player_pos = detected_players[0].global_position  # Chase the first player
-		update_direction(player_pos - position)
-
+		direction = player_pos - position
+		update_direction(direction)
+	
+	update_animations(direction)
 	move_and_slide()
+	
+func update_animations(direction: Vector2):
+	if direction != Vector2.ZERO:
+		if abs(direction.x) > abs(direction.y):  # Horizontal movement dominates
+			if direction.x > 0:
+				direction_facing = RIGHT
+			else:
+				direction_facing = LEFT
+		else:  # Vertical movement dominates
+			if direction.y > 0:
+				direction_facing = DOWN
+			else:
+				direction_facing = UP
+		$AnimatedSprite2D.play(move_animations[direction_facing])
+	else:
+		$AnimatedSprite2D.play("walk_down") # TODO: Add idle anim
 
 func wander(delta):
 	wander_timer -= delta  # Decrease timer
@@ -40,6 +70,7 @@ func wander(delta):
 		wander_direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	
 	velocity = wander_direction * MOVEMENT_SPEED * 0.5  # Move at 50% speed
+	return wander_direction
 
 func update_direction(direction: Vector2):
 	var distance = direction.length()
@@ -49,8 +80,8 @@ func update_direction(direction: Vector2):
 		velocity = angle * MOVEMENT_SPEED
 	elif distance < 70:  # Too close → Move backward
 		velocity = -angle * MOVEMENT_SPEED
-	else:  # Just right → Stay still
-		velocity = Vector2.ZERO
+	else:  # Just right → move just a tiny bit
+		velocity = Vector2(randf_range(-1, 1), randf_range(-1,1)) * MOVEMENT_SPEED / 4
 
 func _on_timer_timeout():
 	projectile()

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bdju8vboo5xbw"]
 
 [ext_resource type="Script" path="res://Scripts/fireBolt.gd" id="1_jylvx"]
-[ext_resource type="Texture2D" uid="uid://bds5dfqabp31q" path="res://Assets/LavaGolem.png" id="2_dt8jt"]
+[ext_resource type="Texture2D" uid="uid://b34eiw3ogqfb6" path="res://Assets/LavaGolem.png" id="2_dt8jt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uec10"]
 atlas = ExtResource("2_dt8jt")
@@ -31,7 +31,8 @@ size = Vector2(22, 7)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cwqmn"]
 size = Vector2(26, 12)
 
-[node name="fireBolt" type="CharacterBody2D"]
+[node name="fireBolt" type="Area2D"]
+z_index = 1
 collision_mask = 2
 script = ExtResource("1_jylvx")
 
