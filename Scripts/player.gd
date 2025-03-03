@@ -1,5 +1,13 @@
 extends CharacterBody2D
 
+@export_enum("blue", "teal") var pcolor: String
+
+@export_enum("blue_attack", "teal_attack") var attack_input: String
+@export_enum("blue_up", "teal_up") var up_input: String
+@export_enum("blue_down", "teal_down") var down_input: String
+@export_enum("blue_left", "teal_left") var left_input: String
+@export_enum("blue_right", "teal_right") var right_input: String
+
 # Player variables and constants
 var move_animations: Array = [
 	"walk_up", 
@@ -25,18 +33,18 @@ func _physics_process(delta):
 	if enemy_in_attack_range and enemy_attack_cooldown:
 		enemy_attack()
 
-	if Input.is_action_just_pressed("teal_attack"):
+	if Input.is_action_just_pressed(attack_input):
 		attack()
 
 	# If player dies, reset their health and remove them from the scene
-	if GameState.teal_health <= 0:
+	if GameState.blue_health <= 0:
 		die()
 
 	# Player movement
 	if not is_attacking:  # If attacking, do not change movement
 		var input_direction = Vector2(
-			Input.get_action_strength("teal_right") - Input.get_action_strength("teal_left"),
-			Input.get_action_strength("teal_down") - Input.get_action_strength("teal_up")
+			Input.get_action_strength(right_input) - Input.get_action_strength(left_input),
+			Input.get_action_strength(down_input) - Input.get_action_strength(up_input)
 		)
 
 		# Update Movement Speed
@@ -74,15 +82,26 @@ func play_attack_animation():
 
 func attack():
 	is_attacking = true
-	GameState.teal_current_attacking = true
+	# TODO: move health into the player
+	match pcolor:
+		"blue": GameState.blue_current_attacking = true
+		"teal": GameState.teal_current_attacking = true
+	
 	await play_attack_animation()
-	GameState.teal_current_attacking = false
+	# TODO: move health into the player
+	match pcolor:
+		"blue": GameState.blue_current_attacking = false
+		"teal": GameState.teal_current_attacking = false
 	is_attacking = false
 	
 
 func enemy_attack():
 	if enemy_attack_cooldown:
-		GameState.teal_health -= damage  # Apply enemy attack
+		# TODO: move health into the players
+		# Apply enemy attack
+		match pcolor:
+			"blue": GameState.blue_health -= damage
+			"teal": GameState.teal_health -= damage  
 		enemy_attack_cooldown = false
 		$attack_cooldown.start()  # Start cooldown timer
 
@@ -90,7 +109,14 @@ func _on_attack_cooldown_timeout() -> void:
 	enemy_attack_cooldown = true  # Reset cooldown for next attack
 	
 func die():
-	GameState.teal_is_alive = false
-	GameState.teal_health = GameState.MAX_HEALTH
-	print("The teal player was killed...") # replace with a message on the screen about teal being killed or something
+	# TODO: move states into player
+	match pcolor:
+		"blue": 
+			GameState.blue_is_alive -= damage
+			GameState.blue_health = GameState.MAX_HEALTH
+		"teal": 
+			GameState.teal_is_alive -= damage 
+			GameState.teal_health = GameState.MAX_HEALTH
+	
+	print("The " + pcolor + " player was killed...")
 	queue_free()

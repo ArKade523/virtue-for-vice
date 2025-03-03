@@ -30,6 +30,7 @@ player_teal_start=""
 player_blue_start=""
 current_scene=""
 game_area=""
+players=""
 
 [input]
 
