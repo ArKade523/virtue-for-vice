@@ -1,10 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://q807jo2extut"]
+[gd_scene load_steps=5 format=3 uid="uid://q807jo2extut"]
 
+[ext_resource type="Script" path="res://Scripts/game_area.gd" id="1_a2q44"]
 [ext_resource type="PackedScene" uid="uid://dy5oujp4cp4pv" path="res://Scenes/hud.tscn" id="1_mrwjm"]
 [ext_resource type="PackedScene" uid="uid://gewynagbgg6s" path="res://Scenes/player_blue.tscn" id="2_e7ga6"]
 [ext_resource type="PackedScene" uid="uid://bddmie48n1ur1" path="res://Scenes/player_teal.tscn" id="3_os600"]
 
-[node name="GameArea" type="Node2D"]
+[node name="GameArea" type="Node2D" groups=["game_area"]]
+script = ExtResource("1_a2q44")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -14,8 +16,9 @@ offset_top = 6.5492
 offset_right = 31.6997
 offset_bottom = 6.54919
 
-[node name="CurrentScene" type="Node2D" parent="." groups=["current_area"]]
+[node name="CurrentScene" type="Node2D" parent="." groups=["current_scene"]]
 
 [node name="PlayerBlue" parent="." instance=ExtResource("2_e7ga6")]
 
 [node name="PlayerTeal" parent="." instance=ExtResource("3_os600")]
+position = Vector2(0, -1)

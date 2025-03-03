@@ -24,11 +24,12 @@ AudioStreamPlayer2d="*res://Scenes/audio_stream_player_2d.tscn"
 [global_group]
 
 enemies=""
-current_area=""
 teal_health=""
 blue_health=""
-player1start=""
-player2start=""
+player_teal_start=""
+player_blue_start=""
+current_scene=""
+game_area=""
 
 [input]
 

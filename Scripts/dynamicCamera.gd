@@ -27,7 +27,7 @@ func _process(delta):
 		midpoint = p2.global_position
 	
 	# **Smoothly move the camera to the midpoint** (+ slight vertical offset)
-	position = position.lerp(midpoint + Vector2(0, -100), delta)
+	position = position.lerp(midpoint, delta)
 
 	# **Calculate distance only if both players exist**
 	var distance = 200  # Default zoom distance if one player is missing

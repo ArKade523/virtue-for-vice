@@ -7,8 +7,9 @@ func _ready():
 	$Camera2D/VBoxContainer/StartButton.grab_focus()
 
 func _start_game():
-	print(\"here\")
-	GameState.load_next_level()
+	var game_area = get_tree().get_first_node_in_group(\"game_area\")
+	if game_area:
+		game_area.load_next_level()
 
 func _quit_game():
 	get_tree().quit()  # Exit the game

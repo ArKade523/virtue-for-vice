@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://d4kgi4ntnsgil"]
+[gd_scene load_steps=34 format=3 uid="uid://d4kgi4ntnsgil"]
 
 [ext_resource type="Script" path="res://Scripts/fireGolem.gd" id="1_b8hbb"]
 [ext_resource type="Texture2D" uid="uid://b34eiw3ogqfb6" path="res://Assets/LavaGolem.png" id="2_0e1n4"]
@@ -266,6 +266,8 @@ radius = 9.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ok75h"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_0nfg5"]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_qc45a"]
 radius = 17.0
 
@@ -284,6 +286,9 @@ shape = SubResource("CircleShape2D_3ivrk")
 [node name="range" type="ShapeCast2D" parent="."]
 shape = SubResource("CircleShape2D_ok75h")
 collision_mask = 2
+
+[node name="locator" type="ShapeCast2D" parent="."]
+shape = SubResource("CircleShape2D_0nfg5")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 2.0

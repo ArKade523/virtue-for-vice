@@ -3,9 +3,6 @@
 [ext_resource type="Texture2D" uid="uid://dkb3ujbx4nta3" path="res://Assets/ActualDarkBluePrince.png" id="2_g635u"]
 [ext_resource type="Script" path="res://Scripts/blue_player.gd" id="4_fsnd5"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xife7"]
-size = Vector2(9, 12.625)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_4e85b"]
 atlas = ExtResource("2_g635u")
 region = Rect2(800, 0, 32, 32)
@@ -122,7 +119,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_epr1x")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_down",
 "speed": 10.0
 }, {
@@ -139,7 +136,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cfq5j")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_left",
 "speed": 10.0
 }, {
@@ -156,7 +153,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cxgtu")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_right",
 "speed": 10.0
 }, {
@@ -173,7 +170,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_oqhhg")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_up",
 "speed": 10.0
 }, {
@@ -248,30 +245,31 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xife7"]
+size = Vector2(9, 12.625)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jey56"]
-size = Vector2(12, 27)
+size = Vector2(18, 31.5)
 
 [node name="PlayerBlue" type="CharacterBody2D"]
 z_index = 5
 collision_layer = 3
 script = ExtResource("4_fsnd5")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 1)
+sprite_frames = SubResource("SpriteFrames_sgjf6")
+animation = &"attack_left"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(47.5, -153.688)
+position = Vector2(-0.5, 7.312)
 shape = SubResource("RectangleShape2D_xife7")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(48, -160)
-sprite_frames = SubResource("SpriteFrames_sgjf6")
-animation = &"walk_down"
-frame = 1
-frame_progress = 0.726187
-
 [node name="player_hit" type="Area2D" parent="."]
-position = Vector2(48, -160)
+position = Vector2(0, 1)
 
 [node name="player_hit_box" type="CollisionShape2D" parent="player_hit"]
-position = Vector2(0, -1)
+position = Vector2(0, -3.25)
 shape = SubResource("RectangleShape2D_jey56")
 
 [node name="attack_cooldown" type="Timer" parent="."]
