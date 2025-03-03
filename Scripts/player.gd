@@ -120,11 +120,11 @@ func disable_all_hitboxes():
 	hitbox_right.disabled = true
 	
 func die():
-	print("The " + pcolor + " player was killed...")
 	# TODO: make the player actually disabled fully
 	# TODO: Add death animation
 	alive = false
 	visible = false
+	global_position.y += 500 # TEMPORARY LOL but it works tho
 
 func revive():
 	# TODO: Add revive animation maybe

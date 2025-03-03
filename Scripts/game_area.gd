@@ -5,8 +5,8 @@ extends Node2D
 @onready var current_scene_container: Node2D = $CurrentScene
 
 var next_dungeon_map = [
-	{"scene": "res://Scenes/start_screen.tscn", "visibleHud": false }, 
-	{"scene": "res://Scenes/story.tscn", "visibleHud": false }, 
+	#{"scene": "res://Scenes/start_screen.tscn", "visibleHud": false }, 
+	#{"scene": "res://Scenes/story.tscn", "visibleHud": false }, 
 	{"scene": "res://Scenes/dungeon1.tscn", "visibleHud": true }, 
 	{"scene": "res://Scenes/level1end.tscn", "visibleHud": false }, 
 	{"scene": "res://Scenes/dungeon2.tscn", "visibleHud": true }, 
