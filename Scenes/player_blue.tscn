@@ -1,6 +1,6 @@
-[gd_scene load_steps=32 format=3 uid="uid://bm4br7jacuwob"]
+[gd_scene load_steps=32 format=3 uid="uid://gewynagbgg6s"]
 
-[ext_resource type="Texture2D" uid="uid://drvi18y6ysqsc" path="res://Assets/ActualDarkBluePrince.png" id="2_g635u"]
+[ext_resource type="Texture2D" uid="uid://dkb3ujbx4nta3" path="res://Assets/ActualDarkBluePrince.png" id="2_g635u"]
 [ext_resource type="Script" path="res://Scripts/blue_player.gd" id="4_fsnd5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xife7"]

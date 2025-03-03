@@ -1,7 +1,7 @@
 [gd_scene load_steps=32 format=3 uid="uid://bddmie48n1ur1"]
 
 [ext_resource type="Script" path="res://Scripts/teal_player.gd" id="1_dctm1"]
-[ext_resource type="Texture2D" uid="uid://b15bi0a0ov4pj" path="res://Assets/BluePrince.png" id="3_a51jg"]
+[ext_resource type="Texture2D" uid="uid://ble6f8dht6o3y" path="res://Assets/BluePrince.png" id="3_a51jg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2yl0p"]
 size = Vector2(9, 12.625)
