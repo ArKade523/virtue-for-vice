@@ -272,7 +272,7 @@ radius = 81.0062
 [sub_resource type="CircleShape2D" id="CircleShape2D_qc45a"]
 radius = 17.0
 
-[node name="FireGolem" type="CharacterBody2D"]
+[node name="FireGolem" type="CharacterBody2D" groups=["enemies"]]
 z_index = 1
 script = ExtResource("1_b8hbb")
 

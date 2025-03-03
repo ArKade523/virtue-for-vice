@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bddmie48n1ur1"]
+[gd_scene load_steps=31 format=3 uid="uid://bddmie48n1ur1"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_x0t2o"]
 [ext_resource type="Texture2D" uid="uid://ble6f8dht6o3y" path="res://Assets/BluePrince.png" id="3_a51jg"]
@@ -248,9 +248,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_a11qd"]
-size = Vector2(21, 27)
-
 [node name="player_teal" type="CharacterBody2D" groups=["players"]]
 z_index = 5
 collision_layer = 3
@@ -270,16 +267,32 @@ shape = SubResource("RectangleShape2D_2yl0p")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["players"]]
 position = Vector2(0, 1)
 sprite_frames = SubResource("SpriteFrames_jthdb")
-animation = &"attack_up"
+animation = &"attack_right"
 
 [node name="player_hit" type="Area2D" parent="."]
 position = Vector2(0, 1)
 
-[node name="player_hit_box" type="CollisionShape2D" parent="player_hit"]
-position = Vector2(1.5, -1.5)
-shape = SubResource("RectangleShape2D_a11qd")
+[node name="player_hit_box" type="CollisionPolygon2D" parent="player_hit"]
+polygon = PackedVector2Array(5, -7, 5, 12, -5, 12, -5, -2, -3, -12, 2, -12)
 
 [node name="attack_cooldown" type="Timer" parent="."]
+
+[node name="sword_hitbox" type="Area2D" parent="."]
+
+[node name="hitbox_up" type="CollisionPolygon2D" parent="sword_hitbox"]
+polygon = PackedVector2Array(-3, -11, 2, -11, 4, -20, -5, -20)
+
+[node name="hitbox_down" type="CollisionPolygon2D" parent="sword_hitbox"]
+position = Vector2(1, 33)
+polygon = PackedVector2Array(-6, -11, 3, -11, 2, -20, -5, -20)
+
+[node name="hitbox_left" type="CollisionPolygon2D" parent="sword_hitbox"]
+position = Vector2(-13, 6)
+polygon = PackedVector2Array(8, 7, 8, -8, 10, -17, 4, -22, -5, -20, -4, -2)
+
+[node name="hitbox_right" type="CollisionPolygon2D" parent="sword_hitbox"]
+position = Vector2(14, 9)
+polygon = PackedVector2Array(-9, 4, -9, -11, -12, -20, -5, -24, 4, -22, 2, -5)
 
 [connection signal="body_entered" from="player_hit" to="." method="_on_player_hit_body_entered"]
 [connection signal="body_exited" from="player_hit" to="." method="_on_player_hit_body_exited"]

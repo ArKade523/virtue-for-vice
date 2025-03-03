@@ -8,6 +8,13 @@ extends CharacterBody2D
 @export_enum("blue_left", "teal_left") var left_input: String
 @export_enum("blue_right", "teal_right") var right_input: String
 
+@onready var sword_hitbox = $sword_hitbox
+@onready var hitbox_up = $sword_hitbox/hitbox_up
+@onready var hitbox_down = $sword_hitbox/hitbox_down
+@onready var hitbox_left = $sword_hitbox/hitbox_left
+@onready var hitbox_right = $sword_hitbox/hitbox_right
+
+
 # Player variables and constants
 var move_animations: Array = [
 	"walk_up", 
@@ -25,8 +32,12 @@ const MOVEMENT_SPEED = GameState.MOVEMENT_SPEED
 var is_attacking = false
 var enemy_in_attack_range = false
 var enemy_attack_cooldown = true
-var direction_facing = 0  # up=0, down=1, left=2, right=3
+var direction_facing = UP  # up=0, down=1, left=2, right=3
 var damage = 5  # Base damage value
+
+func _ready():
+	sword_hitbox.monitoring = false  # Disable hitbox on start
+	sword_hitbox.body_entered.connect(_on_sword_hitbox_body_entered)
 
 func _physics_process(delta):	
 	# Process enemy attack logic
@@ -81,6 +92,8 @@ func play_attack_animation():
 	await $AnimatedSprite2D.animation_finished
 
 func attack():
+	sword_hitbox.monitoring = true
+	enable_correct_hitbox()
 	is_attacking = true
 	# TODO: move health into the player
 	match pcolor:
@@ -92,6 +105,8 @@ func attack():
 	match pcolor:
 		"blue": GameState.blue_current_attacking = false
 		"teal": GameState.teal_current_attacking = false
+	sword_hitbox.monitoring = false
+	disable_all_hitboxes()
 	is_attacking = false
 	
 
@@ -105,17 +120,47 @@ func enemy_attack():
 		enemy_attack_cooldown = false
 		$attack_cooldown.start()  # Start cooldown timer
 
+func take_damage(damage: int):
+	# TODO: Add damage animation
+	match pcolor:
+		"blue": 
+			GameState.blue_health -= damage
+			if GameState.blue_health <= 0:
+				die()
+		"teal": 
+			GameState.teal_health -= damage  
+			if GameState.teal_health <= 0:
+				die()
+
 func _on_attack_cooldown_timeout() -> void:
 	enemy_attack_cooldown = true  # Reset cooldown for next attack
+	
+func _on_sword_hitbox_body_entered(body):
+	if body.is_in_group("enemies") or (body.is_in_group("players") and body != self):
+		body.take_damage(10)  # Call enemy damage function
+	
+func enable_correct_hitbox():
+	disable_all_hitboxes()  # Turn off all hitboxes first
+	match direction_facing:
+		UP: hitbox_up.disabled = false
+		DOWN: hitbox_down.disabled = false
+		LEFT: hitbox_left.disabled = false
+		RIGHT: hitbox_right.disabled = false
+
+func disable_all_hitboxes():
+	hitbox_up.disabled = true
+	hitbox_down.disabled = true
+	hitbox_left.disabled = true
+	hitbox_right.disabled = true
 	
 func die():
 	# TODO: move states into player
 	match pcolor:
 		"blue": 
-			GameState.blue_is_alive -= damage
+			GameState.blue_is_alive = false
 			GameState.blue_health = GameState.MAX_HEALTH
 		"teal": 
-			GameState.teal_is_alive -= damage 
+			GameState.teal_is_alive = false
 			GameState.teal_health = GameState.MAX_HEALTH
 	
 	print("The " + pcolor + " player was killed...")

@@ -98,6 +98,12 @@ func projectile():
 	bullet.initialize_fireBolt(direction)  # Ensure it moves in the right direction
 	get_parent().add_child(bullet)  # Add to the scene
 
+func take_damage(damage: int):
+	health -= damage
+	# TODO: Add damage animation
+	if health <= 0:
+		die()
+	
 func _apply_damage():
 	# Only apply damage if the player is attacking
 	if (teal_in_attack_zone and GameState.teal_current_attacking) or (blue_in_attack_zone and GameState.blue_current_attacking):

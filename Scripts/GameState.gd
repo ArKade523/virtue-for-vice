@@ -25,21 +25,3 @@ var blue_current_attacking = false
 
 ## Other
 const FIREBOLT_DAMAGE = 15
-
-var next_dungeon_map = [
-	{"scene": "res://Scenes/start_screen.tscn", "visibleHud": false }, 
-	{"scene": "res://Scenes/story.tscn", "visibleHud": false }, 
-	{"scene": "res://Scenes/dungeon1.tscn", "visibleHud": true }, 
-	{"scene": "res://Scenes/level1end.tscn", "visibleHud": false }, 
-	{"scene": "res://Scenes/dungeon2.tscn", "visibleHud": true }, 
-	{"scene": "res://Scenes/level2end.tscn", "visibleHud": false }, 
-	{"scene": "res://Scenes/dungeon3.tscn", "visibleHud": true }, 
-	{"scene": "res://Scenes/victory.tscn", "visibleHud": false }, 
-]
-	
-func _process(_delta: float) -> void:
-	var teal_health_bar = get_tree().get_first_node_in_group("teal_health")
-	var blue_health_bar = get_tree().get_first_node_in_group("blue_health")
-	if (teal_health_bar and blue_health_bar):
-		teal_health_bar.value = float(teal_health / MAX_HEALTH) * 100
-		blue_health_bar.value = float(blue_health / (MAX_HEALTH)) * 100

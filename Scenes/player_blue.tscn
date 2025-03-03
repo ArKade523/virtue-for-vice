@@ -280,5 +280,22 @@ shape = SubResource("RectangleShape2D_jey56")
 
 [node name="attack_cooldown" type="Timer" parent="."]
 
+[node name="sword_hitbox" type="Area2D" parent="."]
+
+[node name="hitbox_up" type="CollisionPolygon2D" parent="sword_hitbox"]
+polygon = PackedVector2Array(-3, -11, 2, -11, 4, -20, -5, -20)
+
+[node name="hitbox_down" type="CollisionPolygon2D" parent="sword_hitbox"]
+position = Vector2(1, 33)
+polygon = PackedVector2Array(-6, -11, 3, -11, 2, -20, -5, -20)
+
+[node name="hitbox_left" type="CollisionPolygon2D" parent="sword_hitbox"]
+position = Vector2(-13, 6)
+polygon = PackedVector2Array(8, 7, 8, -8, 10, -17, 4, -22, -5, -20, -4, -2)
+
+[node name="hitbox_right" type="CollisionPolygon2D" parent="sword_hitbox"]
+position = Vector2(14, 9)
+polygon = PackedVector2Array(-9, 4, -9, -11, -12, -20, -5, -24, 4, -22, 2, -5)
+
 [connection signal="body_entered" from="player_hit" to="." method="_on_player_hit_body_entered"]
 [connection signal="body_exited" from="player_hit" to="." method="_on_player_hit_body_exited"]
