@@ -76,7 +76,7 @@ func _on_timer_timeout():
 	attack()
 
 func attack():
-	if detected_players.is_empty():
+	if attackable_players.is_empty():
 		return  # No target
 	
 	var target = attackable_players[0]  # Target the first player detected
@@ -96,7 +96,7 @@ func _on_hurtbox_body_entered(body: Node2D):
 	if body.is_in_group("players"):  # Ensure the body is a player
 		attackable_players.append(body)
 
-func _on_hurtbxx_body_exited(body: Node2D):
+func _on_hurtbox_body_exited(body: Node2D):
 	if body.is_in_group("players"):
 		attackable_players.erase(body)  # Remove the player from tracking list
 
