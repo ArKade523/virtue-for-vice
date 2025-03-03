@@ -27,14 +27,14 @@ var blue_current_attacking = false
 const FIREBOLT_DAMAGE = 15
 
 var next_dungeon_map = [
-	"res://Scenes/start_screen.tscn",
-	"res://Scenes/story.tscn",
-	"res://Scenes/dungeon1.tscn",
-	"res://Scenes/level1end.tscn",
-	"res://Scenes/dungeon2.tscn",
-	"res://Scenes/level2end.tscn",
-	"res://Scenes/dungeon3.tscn",
-	"res://Scenes/victory.tscn",
+	{"scene": "res://Scenes/start_screen.tscn", "visibleHud": false }, 
+	{"scene": "res://Scenes/story.tscn", "visibleHud": false }, 
+	{"scene": "res://Scenes/dungeon1.tscn", "visibleHud": true }, 
+	{"scene": "res://Scenes/level1end.tscn", "visibleHud": false }, 
+	{"scene": "res://Scenes/dungeon2.tscn", "visibleHud": true }, 
+	{"scene": "res://Scenes/level2end.tscn", "visibleHud": false }, 
+	{"scene": "res://Scenes/dungeon3.tscn", "visibleHud": true }, 
+	{"scene": "res://Scenes/victory.tscn", "visibleHud": false }, 
 ]
 
 var current_scene_container: Node2D
@@ -43,10 +43,6 @@ var current_scene: int = 0
 func _ready():
 	current_scene_container = get_tree().get_first_node_in_group("current_area")
 	load_next_level()
-	var teal_health_bar = get_tree().get_first_node_in_group("teal_health")
-	var blue_health_bar = get_tree().get_first_node_in_group("blue_health")
-	teal_health_bar.visible = false
-	blue_health_bar.visible = false
 	
 func _process(_delta: float) -> void:
 	var teal_health_bar = get_tree().get_first_node_in_group("teal_health")
@@ -56,8 +52,9 @@ func _process(_delta: float) -> void:
 		blue_health_bar.value = float(blue_health / (MAX_HEALTH * 5)) * 100
 
 func load_next_level():
-	if next_dungeon_map[current_scene]:
-		var next_scene = load(next_dungeon_map[current_scene]) as PackedScene
+	var next_dungeon = next_dungeon_map[current_scene]
+	if next_dungeon:
+		var next_scene = load(next_dungeon["scene"]) as PackedScene
 		if !next_scene:
 			return
 		if (!current_scene_container):
@@ -69,8 +66,10 @@ func load_next_level():
 		var instance = next_scene.instantiate()
 		current_scene_container.add_child(instance)
 		current_scene += 1
-		if current_scene > 1 :
-			var teal_health_bar = get_tree().get_first_node_in_group("teal_health")
-			var blue_health_bar = get_tree().get_first_node_in_group("blue_health")
-			teal_health_bar.visible = true
-			blue_health_bar.visible = true
+		toggleHudVisibility(next_dungeon["visibleHud"])
+			
+func toggleHudVisibility(on: bool):
+	var teal_health_bar = get_tree().get_first_node_in_group("teal_health")
+	var blue_health_bar = get_tree().get_first_node_in_group("blue_health")
+	teal_health_bar.visible = on
+	blue_health_bar.visible = on

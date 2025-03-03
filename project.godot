@@ -27,6 +27,8 @@ enemies=""
 current_area=""
 teal_health=""
 blue_health=""
+player1start=""
+player2start=""
 
 [input]
 

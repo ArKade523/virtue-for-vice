@@ -705,14 +705,12 @@ position = Vector2(-389, 249)
 [node name="escape_hatch" parent="." instance=ExtResource("4_p22gv")]
 position = Vector2(395, 141)
 
-[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player_1", "player_2")]
+[node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 script = ExtResource("6_wyhg6")
-player_1 = NodePath("")
-player_2 = NodePath("")
 
-[node name="Player1Start" type="Node2D" parent="."]
+[node name="Player1Start" type="Node2D" parent="." groups=["player1start"]]
 position = Vector2(-181, 3)
 
-[node name="Player2Start" type="Node2D" parent="."]
+[node name="Player2Start" type="Node2D" parent="." groups=["player2start"]]
 position = Vector2(-159, -136)

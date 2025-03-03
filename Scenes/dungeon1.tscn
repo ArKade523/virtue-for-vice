@@ -699,8 +699,8 @@ position = Vector2(-9, -81)
 position_smoothing_enabled = true
 script = ExtResource("6_hrnvu")
 
-[node name="Player1Start" type="Node2D" parent="."]
+[node name="Player1Start" type="Node2D" parent="." groups=["player1start"]]
 position = Vector2(-73, -91)
 
-[node name="Player2Start" type="Node2D" parent="."]
+[node name="Player2Start" type="Node2D" parent="." groups=["player2start"]]
 position = Vector2(-104, -67)

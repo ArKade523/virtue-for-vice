@@ -252,6 +252,7 @@ animations = [{
 size = Vector2(12, 27)
 
 [node name="PlayerBlue" type="CharacterBody2D"]
+z_index = 5
 collision_layer = 3
 script = ExtResource("4_fsnd5")
 
